@@ -48,25 +48,11 @@ for arg in "$@"; do
   esac
 done
 
-print_header "Let me do the hard work and go get some coffee" $BLUE
-
-# ###########################################################
-# Dependencies
-# ###########################################################
-print_topic "Dependencies"
-packages=("git")
-for package in "${packages[@]}"; do
-  if ! pacman -Qi "$package" &> /dev/null; then
-    echo "=> Installing $package..."
-    sudo pacman -S --noconfirm --needed "$package" &> /dev/null
-  else
-    echo "=> $package already installed."
-  fi
-done
-
 # ###########################################################
 # Running tasks
 # ###########################################################
+print_header "Let me do the hard work and go get some coffee" $BLUE
+
 print_topic "Pacman"
 chmod +x "$TMP_DIR/tasks/pacman.sh"
 bash "$TMP_DIR/tasks/pacman.sh"
