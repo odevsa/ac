@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # Flatpak packages
 # ###########################################################
-echo "=> Installing flatpak..."
-sudo pacman -S --noconfirm --needed \
-  flatpak \
-  &> /dev/null
+install_official \
+  "flatpak" \
+  "Installing flatpak..."
 
 # ###########################################################
 # Flathub remote

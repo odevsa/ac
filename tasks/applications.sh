@@ -1,87 +1,72 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
+
+SKIP_AUR_HELPER=false
+
+for arg in "$@"; do
+    case $arg in
+        --skip-aur-helper)
+            SKIP_AUR_HELPER=true
+            ;;
+        *)
+    esac
+done
 
 # ###########################################################
 # Terminal applications
 # ###########################################################
-echo "=> Installing terminal applications..."
-sudo pacman -S --noconfirm --needed \
-	btop fastfetch nano \
-	&> /dev/null
+install_official \
+	"btop fastfetch nano" \
+	"Installing terminal applications..."
 
 # ###########################################################
 # Graphical applications
 # ###########################################################
-echo "=> Installing utilities..."
-sudo pacman -S --noconfirm --needed \
-	alacarte gnome-calculator gnome-connections gnome-disk-utility baobab gnome-system-monitor snapshot simple-scan evince file-roller totem loupe \
-	&> /dev/null
+install_official \
+	"alacarte gnome-calculator gnome-connections gnome-disk-utility baobab gnome-system-monitor snapshot simple-scan evince file-roller totem loupe" \
+	"Installing graphical applications..."
 
 # ###########################################################
 # Office
 # ###########################################################
-echo "=> Installing libreoffice..."
-sudo pacman -S --noconfirm --needed \
-	libreoffice-fresh \
-	&> /dev/null || true
+install_official_or_aur $SKIP_AUR_HELPER "libreoffice-fresh" "onlyoffice-bin"
 
-    # YAY
-    # Install AUR onlyoffice-bin
-    # yay -S --noconfirm onlyoffice-bin
 
 # ###########################################################
 # Development applications
 # ###########################################################
-echo "=> Installing development applications..."
-sudo pacman -S --noconfirm --needed \
-  dbeaver \
-  &> /dev/null || true
+install_official \
+	"dbeaver" \
+	"Installing development applications..."
 
-echo "=> Install Code - OSS..."
-sudo pacman -S --noconfirm --needed \
-  code \
-  &> /dev/null || true
-
-    # YAY
-    # Install AUR visual-studio-code-bin
-    # yay -S --noconfirm visual-studio-code-bin
-
+install_official_or_aur $SKIP_AUR_HELPER "code" "visual-studio-code-bin"
 
 # ###########################################################
 # Graphics applications
 # ###########################################################
-echo "=> Installing graphics applications..."
-sudo pacman -S --noconfirm --needed \
-	gimp inkscape \
-	&> /dev/null || true
+install_official \
+	"gimp inkscape" \
+	"Installing graphics applications..."
 
 # ###########################################################
 # Multimedia applications
 # ###########################################################
-echo "=> Installing multimedia applications..."
-sudo pacman -S --noconfirm --needed \
-	audacity obs-studio kdenlive \
-	&> /dev/null || true
+install_official \
+	"audacity obs-studio kdenlive" \
+	"Installing multimedia applications..."
 
 # ###########################################################
 # 3D applications
 # ###########################################################
-echo "=> Installing 3D applications..."
-sudo pacman -S --noconfirm --needed \
-	blender freecad \
-	&> /dev/null || true
+install_official \
+	"blender freecad" \
+	"Installing 3D applications..."
 
 # ###########################################################
 # 3D printing applications
 # ###########################################################
-echo "=> Installing 3D printing applications..."
-sudo pacman -S --noconfirm --needed \
-	 prusa-slicer \
-	&> /dev/null || true
-
-    # YAY
-    # Install AUR orca-slicer-bin
-    # yay -S --noconfirm orca-slicer-bin
+install_official_or_aur $SKIP_AUR_HELPER "prusa-slicer" "orca-slicer-bin"
 
 # ###########################################################
 # Create applications.menu symlink

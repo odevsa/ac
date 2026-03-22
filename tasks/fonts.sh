@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # Fonts
 # ###########################################################
-echo "=> Installing fonts..."
-sudo pacman -S --noconfirm --needed \
-	ttf-font-awesome ttf-firacode-nerd ttf-iosevka-nerd noto-fonts-emoji noto-fonts-cjk noto-fonts-extra \
-	&> /dev/null
+install_official \
+	"ttf-font-awesome ttf-firacode-nerd ttf-iosevka-nerd noto-fonts-emoji noto-fonts-cjk noto-fonts-extra" \
+	"Installing fonts..."

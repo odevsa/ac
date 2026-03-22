@@ -63,7 +63,6 @@ It's needing of some check before to do changes in files of the system yet, so i
 
 - Any distribution based on Arch Linux, preferably a clean installation of Arch Linux with systemd-boot (grub not tested yet).
 - Internet connection:
-
   - Ethernet
   - Wifi with `iwctl`
 
@@ -88,18 +87,22 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/install.sh)
 
 You may want to use flags to customize installation
 
-| Flag          | Description                                                                                       |
-| ------------- | ------------------------------------------------------------------------------------------------- |
-| `--no-amdgpu` | Disables the installation of AMD GPU (amdgpu).                                                    |
-| `--no-nvidia` | Disables the installation of NVIDIA GPU (nvidia).                                                 |
-| `--no-gpu`    | Disables the installation of both AMD and NVIDIA GPUs.                                            |
-| `--no-apps`   | Disables all application-related installations.                                                   |
-| `--only-core` | Installs only core system components, disabling other features like applications and GPU drivers. |
+| Flag                | Description                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------- |
+| `--debug`           | Run with local files for debugging                                                                |
+| `--skip-aur-helper` | Skip YAY and AUR packages installation.                                                           |
+| `--skip-amdgpu`     | Skip AMD GPU (amdgpu) installation.                                                               |
+| `--skip-nvidia`     | Skip NVIDIA GPU (nvidia) installation.                                                            |
+| `--skip-gpu`        | Skip both AMD and NVIDIA GPUs installation.                                                       |
+| `--skip-apps`       | Skip all application-related installations.                                                       |
+| `--skip-neovim`     | Skip Neovim and NvChad installations.                                                             |
+| `--skip-docker`     | Skip Docker installations.                                                                        |
+| `--only-core`       | Installs only core system components, disabling other features like applications and GPU drivers. |
 
 For example: If you don't want Nvidia driver and default applications, you can try:
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/install.sh)" -- --no-nvidia --no-apps
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/install.sh)" -- --skip-nvidia --skip-apps
 ```
 
 ## Manual Install

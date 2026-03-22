@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # Docker
 # ###########################################################
-echo "=> Installing Docker and docker-compose..."
-sudo pacman -S --noconfirm --needed \
-  docker docker-compose \
-  &> /dev/null
+install_official \
+  "docker docker-compose" \
+  "Installing Docker and docker-compose..."
 
 # ###########################################################
 # Enable services

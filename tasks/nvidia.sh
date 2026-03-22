@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # GPU Drivers Nvidia
-# ###########################################################  
-echo "=> Installing gpu drivers (Nvidia)..."
-sudo pacman -S --noconfirm --needed \
-	nvidia-open nvidia-utils lib32-nvidia-utils nvidia-prime nvidia-settings nvtop \
-	&> /dev/null
+# ###########################################################
+install_official \
+    "nvidia-open nvidia-utils lib32-nvidia-utils nvidia-prime nvidia-settings nvtop" \
+    "Installing gpu drivers (Nvidia)..."
 
-# #############################################################
+# ###########################################################
 # Add Nvidia modules to mkinitcpio.conf
-# #############################################################
+# ###########################################################
 MK_FILE=/etc/mkinitcpio.conf
 echo "=> Ensuring Nvidia modules are present in $MK_FILE..."
 if [ -f "$MK_FILE" ]; then

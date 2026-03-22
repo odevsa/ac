@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 TMP_DIR_ANTIGEN="/tmp/.antigen"
 
 # ############################################################
 # ZSH
 # ############################################################
-echo "=> Installing zsh and helpers..."
-sudo pacman -S --noconfirm --needed \
-  zsh eza bat \
-  &> /dev/null || true
+install_official \
+  "zsh eza bat" \
+  "Installing zsh and helpers..."
 
 # ############################################################
 # Set default shell to zsh for current user and root

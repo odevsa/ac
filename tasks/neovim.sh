@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # Neovim
 # ###########################################################
-echo "=> Installing Neovim..."
-sudo pacman -S --noconfirm --needed \
-  neovim \
-  &> /dev/null
+install_official \
+  "neovim" \
+  "Installing Neovim..."
 
 # ###########################################################
 # NvChad

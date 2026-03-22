@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # Cosmic Desktop Environment
 # ###########################################################
-echo "=> Installing Cosmic Desktop Environment..."
-sudo pacman -S --noconfirm --needed \
-  cosmic power-profiles-daemon \
-  &> /dev/null || true
+install_official \
+  "cosmic power-profiles-daemon" \
+  "Installing Cosmic Desktop Environment..."
 
 # ###########################################################
 # Enable services
@@ -30,5 +30,6 @@ if compgen -G "$BOOT_DIR/$PATTERN" > /dev/null; then
       continue
     fi
     sudo sed -E -i "s/^(options[[:space:]].*)$/\1 quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3/" "$f" || true
+    echo "   - added 'quiet' to boot options"
   done
 fi

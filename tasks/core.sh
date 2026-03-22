@@ -1,82 +1,73 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # General packages
-# ###########################################################  
-echo "=> Installing general packages..."
-sudo pacman -S --noconfirm --needed \
-  curl wget usbutils gnome-keyring \
-  &> /dev/null
+# ###########################################################
+install_official \
+  "curl wget usbutils gnome-keyring" \
+  "Installing general packages..."
 
 # ###########################################################
 # Audio codecs packages
-# ###########################################################  
-echo "=> Installing audio codecs..."
-sudo pacman -S --noconfirm --needed \
-  flac wavpack faac faad2 libfdk-aac a52dec libdca lame libmad libmpcdec opencore-amr opus libvorbis speex \
-  &> /dev/null
+# ###########################################################
+install_official \
+  "flac wavpack faac faad2 libfdk-aac a52dec libdca lame libmad libmpcdec opencore-amr opus libvorbis speex" \
+  "Installing audio codecs..."
 
 # ###########################################################
 # Image codecs packages
-# ###########################################################  
-echo "=> Installing image codecs..."
-sudo pacman -S --noconfirm --needed \
-  jasper libwebp libavif libheif libjxl \
-  &> /dev/null
+# ###########################################################
+install_official \
+  "jasper libwebp libavif libheif libjxl" \
+  "Installing image codecs..."
 
 # ###########################################################
 # Video codecs packages
-# ###########################################################  
-echo "=> Installing video codecs..."
-sudo pacman -S --noconfirm --needed \
-  aom dav1d rav1e svt-av1 schroedinger libdv x265 libde265 x264 libmpeg2 xvidcore libtheora libvpx \
-  &> /dev/null
+# ###########################################################
+install_official \
+  "aom dav1d rav1e svt-av1 schroedinger libdv x265 libde265 x264 libmpeg2 xvidcore libtheora libvpx" \
+  "Installing video codecs..."
 
 # ############################################################
 # Gstreamer plugins packages
 # ############################################################
-echo "=> Installing gstreamer plugins..."
-sudo pacman -S --noconfirm --needed \
-  gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly \
-  &> /dev/null
+install_official \
+  "gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly" \
+  "Installing gstreamer plugins..."
 
 # ############################################################
 # Archive packages
 # ############################################################
-echo "=> Installing archive packages..."
-sudo pacman -S --noconfirm --needed \
-  p7zip unrar unzip xz zip bzip2 gzip tar \
-  &> /dev/null
+install_official \
+  "p7zip unrar unzip xz zip bzip2 gzip tar" \
+  "Installing archive packages..."
 
 # ############################################################
 # Filesystem packages
 # ############################################################
-echo "=> Installing filesystem packages..."
-sudo pacman -S --noconfirm --needed \
-  dosfstools exfatprogs xfsprogs jfsutils f2fs-tools ntfs-3g e2fsprogs btrfs-progs \
-  &> /dev/null
+install_official \
+  "dosfstools exfatprogs xfsprogs jfsutils f2fs-tools ntfs-3g e2fsprogs btrfs-progs" \
+  "Installing filesystem packages..."
 
 # ############################################################
 # Hardware and system packages
 # ############################################################
-echo "=> Installing hardware and system packages..."
-sudo pacman -S --noconfirm --needed \
-  fwupd mesa vulkan-tools vulkan-intel networkmanager bluez pipewire pipewire-pulse wireplumber \
-  &> /dev/null
+install_official \
+  "fwupd mesa vulkan-tools vulkan-intel networkmanager bluez pipewire pipewire-pulse wireplumber" \
+  "Installing hardware and system packages..."
 
 # ############################################################
 # Development packages
 # ############################################################
-echo "=> Installing development packages..."
-sudo pacman -S --noconfirm --needed \
-  base-devel git python rust nodejs-lts-iron npm \
-  &> /dev/null
-
+install_official \
+  "base-devel git python rust nodejs-lts-iron npm" \
+  "Installing development packages..."
 
 # ###########################################################
 # Enable services
-# ###########################################################  
+# ###########################################################
 echo "=> Enabling and starting NetworkManager services..."
 sudo systemctl enable --now "NetworkManager" &> /dev/null || true
 

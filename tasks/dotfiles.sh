@@ -24,6 +24,8 @@ find "$TMP_DIR" -type f -exec sed -i "s/{user}/$USER/g" '{}' \; || true
 # ############################################################
 echo "=> Copying dotfiles to home..."
 cp -r "$TMP_DIR/." "$HOME/" || true
+sudo rm -rf "$HOME/.git/" || true
+
 
 # ############################################################
 # Copy dotfiles to root

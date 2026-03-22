@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 REPO_URL="https://aur.archlinux.org/yay.git"
 TMP_DIR="/tmp/yay"
@@ -15,10 +16,9 @@ fi
 # ###########################################################
 # Dependencies packages
 # ###########################################################
-echo "=> Installing dependencies for building AUR packages..."
-sudo pacman -S --noconfirm --needed \
-	base-devel git \
-	&> /dev/null
+install_official \
+	"base-devel git" \
+	"Installing dependencies for building AUR packages..."
 
 # ###########################################################
 # Clone repository yay

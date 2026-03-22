@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 # ###########################################################
 # GPU Drivers AMD
-# ###########################################################  
-echo "=> Installing gpu drivers (AMD)..."
-sudo pacman -S --noconfirm --needed \
-	vulkan-radeon libva-mesa-driver mesa radeontop \
-	&> /dev/null
+# ###########################################################
+install_official \
+	"vulkan-radeon libva-mesa-driver mesa radeontop" \
+	"Installing gpu drivers (AMD)..."
