@@ -39,8 +39,8 @@ install_official() {
         echo "=> Installing $package..."
     fi
     sudo pacman -S --noconfirm --needed \
-        $package #\
-        #&> /dev/null || true
+        $package \
+        &> /dev/null || true
 }
 
 install_aur() {
@@ -53,8 +53,8 @@ install_aur() {
         echo "=> Installing AUR $package..."
     fi
     yay -S --noconfirm --needed \
-        $package #\
-        #&> /dev/null || true
+        $package \
+        &> /dev/null || true
 }
 
 install_official_or_aur() {
@@ -63,8 +63,8 @@ install_official_or_aur() {
     local aur="${3:-}"
 
     if [ "$is_official" = true ]; then
-        install_official "$official"
+        install_official $official
     else
-        install_aur "$aur"
+        install_aur $aur
     fi
 }
