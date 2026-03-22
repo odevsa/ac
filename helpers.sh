@@ -39,7 +39,7 @@ install_official() {
         echo "=> Installing $package..."
     fi
     sudo pacman -S --noconfirm --needed \
-        "$package" #\
+        $package #\
         #&> /dev/null || true
 }
 
@@ -53,7 +53,7 @@ install_aur() {
         echo "=> Installing AUR $package..."
     fi
     yay -S --noconfirm --needed \
-        "$package" #\
+        $package #\
         #&> /dev/null || true
 }
 
