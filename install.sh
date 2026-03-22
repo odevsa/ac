@@ -48,7 +48,7 @@ for arg in "$@"; do
   esac
 done
 
-print_header "Let me do the hard work and go get some ☕" $BLUE
+print_header "Let me do the hard work and go get some coffee" $BLUE
 
 # ###########################################################
 # Dependencies
@@ -141,7 +141,7 @@ bash "$TMP_DIR/tasks/cosmic.sh"
 # ###########################################################
 # Finishing up
 # ###########################################################
-print_header "Finished! 🍺" $GREEN
+print_header "Finished!" $GREEN
 echo "Reboot now? (Y/n)" && read CONFIRM_REBOOT
 if [ "$CONFIRM_REBOOT" == "y" ] || [ "$CONFIRM_REBOOT" == "Y" ] || [ -z "$CONFIRM_REBOOT" ]; then
 	echo "=> Rebooting..."
