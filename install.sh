@@ -6,7 +6,7 @@ sudo -v
 # ###########################################################
 # Flags
 # ###########################################################
-DEBUG=false
+TMP_DIR="."
 SKIP_AMDGPU=false
 SKIP_NVIDIA=false
 SKIP_GPU=false
@@ -18,9 +18,6 @@ ONLY_CORE=false
 
 for arg in "$@"; do
   case $arg in
-    --debug)
-      DEBUG=true
-      ;;
     --skip-aur-helper)
       SKIP_AUR_HELPER=true
       ;;
@@ -66,17 +63,6 @@ for package in "${packages[@]}"; do
     echo "=> $package already installed."
   fi
 done
-
-# ###########################################################
-# Cloning the repository
-# ###########################################################
-TMP_DIR=$([[ "$DEBUG" = true ]] && echo "." || echo "/tmp/ac")
-if [ "$DEBUG" = false ]; then
-  echo "=> Cloning into $TMP_DIR..."
-  sudo rm -rf "$TMP_DIR"
-  git clone https://github.com/odevsa/ac.git "$TMP_DIR" &> /dev/null
-fi
-
 
 # ###########################################################
 # Running tasks
