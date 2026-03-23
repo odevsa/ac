@@ -9,10 +9,16 @@ My Dotfiles are here: https://github.com/odevsa/dotfiles
 This is for my personal use and it's working in progress, so files can be deleted, things can break, etc. If you want to try it, it`s for your own risk.
 
 ## Screenshots
-<div style="display:flex; gap:2%; justify-content:center;">
-  <img src="assets/screenshot-1.png" alt="Screenshot 1" style="width:49%;height:auto;" />
-  <img src="assets/screenshot-2.png" alt="Screenshot 2" style="width:49%;height:auto;" />
-</div>
+<table style="border: none; border-collapse: collapse;">
+  <tr>
+    <td>
+      <img src="assets/screenshot-1.png" alt="Screenshot 1" />
+    </td>
+    <td>
+      <img src="assets/screenshot-2.png" alt="Screenshot 2" />
+    </td>
+  </tr>
+</table>
 
 ## What does this do?
 
