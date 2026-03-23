@@ -5,7 +5,14 @@ REPO_URL="https://github.com/odevsa/dotfiles.git"
 TMP_DIR=/tmp/dotfiles
 
 # ###########################################################
-# Clone repository yay
+# Dependencies packages
+# ###########################################################
+install_official \
+	"git" \
+	"Installing dependencies..."
+
+# ###########################################################
+# Clone repository dotfiles
 # ###########################################################
 echo "=> Removing old $TMP_DIR..."
 sudo rm -rf "$TMP_DIR" || true
@@ -24,8 +31,7 @@ find "$TMP_DIR" -type f -exec sed -i "s/{user}/$USER/g" '{}' \; || true
 # ############################################################
 echo "=> Copying dotfiles to home..."
 cp -r "$TMP_DIR/." "$HOME/" || true
-sudo rm -rf "$HOME/.git/" || true
-
+(cd "$HOME" && sudo rm -rf ~/.git ~/install.sh ~/README.md) || true
 
 # ############################################################
 # Copy dotfiles to root

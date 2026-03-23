@@ -8,39 +8,38 @@ My Dotfiles are here: https://github.com/odevsa/dotfiles
 
 This is for my personal use and it's working in progress, so files can be deleted, things can break, etc. If you want to try it, it`s for your own risk.
 
-## Important
-
-It's in progress, so please EXECUTE ONLY ONCE.
-
-It's needing of some check before to do changes in files of the system yet, so if you execute more then one time, the changes will be duplicated in files.
-
 ## Screenshots
 
 ...
 
 ## What does this do?
 
+- [x] Service for Reflector
 - [x] Update
-- [x] :checkered_flag: - AUR Support (yay)
-- [x] Copy dotfiles (custom dotfiles see: [common/vars/main.yml](common/vars/main.yml))
+- [x] Flatpak support
+- [x] 🏳️ - AUR Helper (yay)
+- [x] Copy dotfiles (custom dotfiles see: [tasks/dotfiles.sh](tasks/dotfiles.sh))
 - [x] Codecs (audio, image and video)
 - [x] Main file compressors (zip, unrar, p7zip...)
+- [x] Filesystem (dosfstools exfatprogs xfsprogs...)
 - [x] Multimedia core (mesa, vulkan, network, bluetooth, pipewire...)
 - [x] Popular development packages (git, rust, python, nodejs...)
 - [x] Zsh (set as default, oh-my-posh, oh-my-zsh, sintax-highlight, autosuggestion)
-- [x] :checkered_flag: - Amdgpu
-- [x] :checkered_flag: - Nvidia
-- [x] Fonts (font-awesome, firacode-nerd)
+- [x] 🏳️ - Amdgpu GPU Drivers
+- [x] 🏳️ - Nvidia GPU Drivers
+- [x] Fonts (font-awesome, firacode-nerd, noto-fonts-cjk...)
 - [x] Terminal Applications (fastfetch, neovim, btop...)
-- [x] :checkered_flag: - Utilities Applications (nautilus, file-roller, snapshot, totem...)
-- [x] :checkered_flag: - Development Applications (spacevim, dbeaver, docker...)
-- [x] :checkered_flag: - Graphical Applications (gimp, inkscape)
-- [x] :checkered_flag: - Multimedia Applications (audacity, obs-studio, kdenlive)
-- [x] :checkered_flag: - 3D Applications (blender, freecad)
-- [x] :checkered_flag: - Browser (firefox | chromium | vivaldi | google-chrome)
+- [x] 🏳️ - Utilities Applications (nautilus, file-roller, snapshot, totem...)
+- [x] 🏳️ - Development Applications (dbeaver)
+- [x] 🏳️ - Graphical Applications (gimp, inkscape)
+- [x] 🏳️ - Multimedia Applications (audacity, obs-studio, kdenlive)
+- [x] 🏳️ - 3D Applications (blender, freecad)
+- [x] 🏳️ - Neovim (NvChad)
+- [x] 🏳️ - Docker (NvChad)
+- [x] 🏳️ - Browser (firefox | chromium | vivaldi | google-chrome)
 - [x] Cosmic Desktop Environment
 
-:checkered_flag: = Optional installation, see: [common/vars/main.yml](common/vars/main.yml)
+🏳️ = Optional installation, check the `Flags` section bellow.
 
 ## Shortcuts
 
@@ -77,19 +76,9 @@ It's needing of some check before to do changes in files of the system yet, so i
     $ nmcli device wifi connect "<SSID>" --ask
     ```
 
-## Automatic Install
-
-Just run this code and see the magic
-
-```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/install.sh)"
-```
-
-You may want to use flags to customize installation
-
+## Flags
 | Flag                | Description                                                                                       |
 | ------------------- | ------------------------------------------------------------------------------------------------- |
-| `--debug`           | Run with local files for debugging                                                                |
 | `--skip-aur-helper` | Skip YAY and AUR packages installation.                                                           |
 | `--skip-amdgpu`     | Skip AMD GPU (amdgpu) installation.                                                               |
 | `--skip-nvidia`     | Skip NVIDIA GPU (nvidia) installation.                                                            |
@@ -99,10 +88,18 @@ You may want to use flags to customize installation
 | `--skip-docker`     | Skip Docker installations.                                                                        |
 | `--only-core`       | Installs only core system components, disabling other features like applications and GPU drivers. |
 
-For example: If you don't want Nvidia driver and default applications, you can try:
+## Automatic Install
+
+Just run this code and see the magic
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/install.sh)" -- --skip-nvidia --skip-apps
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/run.sh)"
+```
+
+You may want to use flags to customize installation for example: If you don't want Nvidia driver and default applications, you can try:
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/run.sh)" -- --skip-nvidia --skip-apps
 ```
 
 ## Manual Install
@@ -124,12 +121,21 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/install.sh)
   ```
   cd ac
   ```
+- If you want to use your own dotfiles repository, change the `REPO_URL` into [tasks/dotfiles.sh](tasks/dotfiles.sh)
 
-- Customize the file [common/vars/main.yml](common/vars/main.yml) as you need
+- Give permission to execute
+  ```
+  chmod +x install.sh
+  ```
 
 - Run
   ```
-  chmod +x install.sh
   ./install.sh
   ```
-- Input sudo password when it ask for
+
+- Or run with flags, just add them after the command.
+  ```
+  ./install.sh --skip-nvidia --skip-apps
+  ```
+
+- Input password when it ask for
