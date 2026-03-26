@@ -14,6 +14,7 @@ SKIP_APPS=false
 SKIP_NEOVIM=false
 SKIP_DOCKER=false
 SKIP_AUR_HELPER=false
+SKIP_PREFERENCES=false
 ONLY_CORE=false
 
 for arg in "$@"; do
@@ -41,6 +42,9 @@ for arg in "$@"; do
       ;;
     --only-core)
       ONLY_CORE=true
+      ;;
+    --skip-preferences)
+      SKIP_PREFERENCES=true
       ;;
     *)
       echo "Unknown option: $arg"
@@ -119,6 +123,12 @@ FLAGS="$BROWSER $([[ $SKIP_AUR_HELPER = true ]] && echo "--skip-aur-helper" || e
 print_topic "Browser"
 chmod +x "$TMP_DIR/tasks/browser.sh"
 bash "$TMP_DIR/tasks/browser.sh" ${FLAGS}
+
+if [ "$SKIP_PREFERENCES" = false ] && [ "$ONLY_CORE" = false ]; then
+  print_topic "Preferences"
+  chmod +x "$TMP_DIR/tasks/preferences.sh"
+  bash "$TMP_DIR/tasks/preferences.sh"
+fi
 
 print_topic "Desktop Environment (Cosmic)"
 chmod +x "$TMP_DIR/tasks/cosmic.sh"

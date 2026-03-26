@@ -85,16 +85,17 @@ This is for my personal use and it's working in progress, so files can be delete
     ```
 
 ## Flags
-| Flag                | Description                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------- |
-| `--skip-aur-helper` | Skip YAY and AUR packages installation.                                                           |
-| `--skip-amdgpu`     | Skip AMD GPU (amdgpu) installation.                                                               |
-| `--skip-nvidia`     | Skip NVIDIA GPU (nvidia) installation.                                                            |
-| `--skip-gpu`        | Skip both AMD and NVIDIA GPUs installation.                                                       |
-| `--skip-apps`       | Skip all application-related installations.                                                       |
-| `--skip-neovim`     | Skip Neovim and NvChad installations.                                                             |
-| `--skip-docker`     | Skip Docker installations.                                                                        |
-| `--only-core`       | Installs only core system components, disabling other features like applications and GPU drivers. |
+| Flag                  | Description                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| `--skip-aur-helper`   | Skip YAY and AUR packages installation task.                                                      |
+| `--skip-amdgpu`       | Skip AMD GPU (amdgpu) installation task.                                                          |
+| `--skip-nvidia`       | Skip NVIDIA GPU (nvidia) installation task.                                                       |
+| `--skip-gpu`          | Skip both AMD and NVIDIA GPUs installation task.                                                  |
+| `--skip-apps`         | Skip all application-related installation task.                                                   |
+| `--skip-neovim`       | Skip Neovim and NvChad installation task.                                                         |
+| `--skip-docker`       | Skip Docker installation task.                                                                    |
+| `--skip-preferences`  | Skip preferences task.                                                                            |
+| `--only-core`         | Installs only core system components, disabling other features like applications and GPU drivers. |
 
 ## Automatic Install
 
