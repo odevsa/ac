@@ -62,7 +62,7 @@ install_official \
 # Development packages
 # ############################################################
 install_official \
-  "base-devel git python rust nodejs-lts-iron npm" \
+  "base-devel cmake git python rust nodejs-lts-iron npm" \
   "Installing development packages..."
 
 # ###########################################################

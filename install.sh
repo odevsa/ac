@@ -129,8 +129,8 @@ if [ "$SKIP_PREFERENCES" = false ] && [ "$ONLY_CORE" = false ]; then
   chmod +x "$TMP_DIR/tasks/preferences.sh"
   bash "$TMP_DIR/tasks/preferences.sh"
 
-  chmod +x "$TMP_DIR/tasks/stl-thumb.sh"
-  bash "$TMP_DIR/tasks/stl-thumb.sh"
+  chmod +x "$TMP_DIR/tasks/stl.sh"
+  bash "$TMP_DIR/tasks/stl.sh"
 fi
 
 
