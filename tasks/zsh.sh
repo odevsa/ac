@@ -8,7 +8,7 @@ TMP_DIR_ANTIGEN="/tmp/.antigen"
 # ZSH
 # ############################################################
 install_official \
-  "zsh eza bat" \
+  "zsh lsd bat" \
   "Installing zsh and helpers..."
 
 # ############################################################
