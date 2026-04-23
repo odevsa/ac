@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "helpers.sh"
 
 REPO_URL="https://github.com/odevsa/dotfiles.git"
 TMP_DIR=/tmp/dotfiles
