@@ -13,7 +13,7 @@ install_official \
 # Enable services
 # ###########################################################
 echo "=> Enabling cosmic-greeter service..."
-sudo systemctl enable --now cosmic-greeter &> /dev/null || true
+sudo systemctl enable cosmic-greeter &> /dev/null || true
 
 
 # ###########################################################
