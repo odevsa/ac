@@ -55,7 +55,7 @@ install_official \
 # Hardware and system packages
 # ############################################################
 install_official \
-  "fwupd mesa vulkan-tools vulkan-intel networkmanager bluez pipewire pipewire-pulse wireplumber" \
+  "fwupd mesa vulkan-tools vulkan-intel networkmanager bluez bluez-utils pipewire pipewire-pulse wireplumber" \
   "Installing hardware and system packages..."
 
 # ############################################################
