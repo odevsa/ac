@@ -2,6 +2,15 @@
 set -euo pipefail
 source "helpers.sh"
 
+
+
+# ###########################################################
+# Set default image viewer to GNOME Loupe
+# ###########################################################
+echo "=> Setting default image viewer to GNOME Loupe..."
+xdg-mime default org.gnome.Loupe.desktop image/jpeg image/png image/gif image/webp image/bmp image/tiff image/svg+xml
+
+
 # ###########################################################
 # Solve bug with copying large files to external drives
 # ###########################################################

@@ -6,7 +6,7 @@ source "helpers.sh"
 # General packages
 # ###########################################################
 install_official \
-  "curl wget usbutils gnome-keyring" \
+  "curl wget usbutils" \
   "Installing general packages..."
 
 # ###########################################################
