@@ -42,29 +42,3 @@ install_official() {
         $package \
         &> /dev/null || true
 }
-
-install_aur() {
-    local package="$1"
-    local message="${2:-}"
-    
-    if [ -n "$message" ]; then
-        echo "=> $message"
-    else
-        echo "=> Installing AUR $package..."
-    fi
-    yay -S --noconfirm --needed \
-        $package \
-        &> /dev/null || true
-}
-
-install_official_or_aur() {
-    local is_official="$1"
-    local official="${2:-}"
-    local aur="${3:-}"
-
-    if [ "$is_official" = true ]; then
-        install_official $official
-    else
-        install_aur $aur
-    fi
-}

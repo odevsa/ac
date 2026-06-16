@@ -9,6 +9,7 @@ My Dotfiles are here: https://github.com/odevsa/dotfiles
 This is for my personal use and it's working in progress, so files can be deleted, things can break, etc. If you want to try it, it`s for your own risk.
 
 ## Screenshots
+
 <table style="border: none; border-collapse: collapse;">
   <tr>
     <td>
@@ -25,26 +26,22 @@ This is for my personal use and it's working in progress, so files can be delete
 - [x] Service for Reflector
 - [x] Update
 - [x] Flatpak support
-- [x] 🏳️ - AUR Helper (yay)
 - [x] Copy dotfiles (custom dotfiles see: [tasks/dotfiles.sh](tasks/dotfiles.sh))
 - [x] Codecs (audio, image and video)
 - [x] Main file compressors (zip, unrar, p7zip...)
 - [x] Filesystem (dosfstools exfatprogs xfsprogs...)
 - [x] Multimedia core (mesa, vulkan, network, bluetooth, pipewire...)
 - [x] Popular development packages (git, rust, python, nodejs...)
-- [x] Zsh (set as default, oh-my-posh, oh-my-zsh, sintax-highlight, autosuggestion)
+- [x] Shell (fish, set as default, oh-my-posh)
 - [x] 🏳️ - Amdgpu GPU Drivers
 - [x] 🏳️ - Nvidia GPU Drivers
 - [x] Fonts (font-awesome, firacode-nerd, noto-fonts-cjk...)
-- [x] Terminal Applications (fastfetch, neovim, btop...)
+- [x] Terminal Applications (fastfetch, btop...)
 - [x] 🏳️ - Utilities Applications (nautilus, file-roller, snapshot, totem...)
-- [x] 🏳️ - Development Applications (dbeaver)
 - [x] 🏳️ - Graphical Applications (gimp, inkscape)
-- [x] 🏳️ - Multimedia Applications (audacity, obs-studio, kdenlive)
 - [x] 🏳️ - 3D Applications (blender, freecad)
-- [x] 🏳️ - Neovim (NvChad)
-- [x] 🏳️ - Docker (NvChad)
-- [x] 🏳️ - Browser (firefox | chromium | vivaldi | google-chrome)
+- [x] 🏳️ - Docker (docker, docker-compose)
+- [x] 🏳️ - Browser (firefox)
 - [x] Cosmic Desktop Environment
 
 🏳️ = Optional installation, check the `Flags` section bellow.
@@ -85,17 +82,16 @@ This is for my personal use and it's working in progress, so files can be delete
     ```
 
 ## Flags
-| Flag                  | Description                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------- |
-| `--skip-aur-helper`   | Skip YAY and AUR packages installation task.                                                      |
-| `--skip-amdgpu`       | Skip AMD GPU (amdgpu) installation task.                                                          |
-| `--skip-nvidia`       | Skip NVIDIA GPU (nvidia) installation task.                                                       |
-| `--skip-gpu`          | Skip both AMD and NVIDIA GPUs installation task.                                                  |
-| `--skip-apps`         | Skip all application-related installation task.                                                   |
-| `--skip-neovim`       | Skip Neovim and NvChad installation task.                                                         |
-| `--skip-docker`       | Skip Docker installation task.                                                                    |
-| `--skip-preferences`  | Skip preferences task.                                                                            |
-| `--only-core`         | Installs only core system components, disabling other features like applications and GPU drivers. |
+
+| Flag                 | Description                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| `--skip-amdgpu`      | Skip AMD GPU (amdgpu) installation task.                                                          |
+| `--skip-nvidia`      | Skip NVIDIA GPU (nvidia) installation task.                                                       |
+| `--skip-gpu`         | Skip both AMD and NVIDIA GPUs installation task.                                                  |
+| `--skip-apps`        | Skip all application-related installation task.                                                   |
+| `--skip-docker`      | Skip Docker installation task.                                                                    |
+| `--skip-preferences` | Skip preferences task.                                                                            |
+| `--only-core`        | Installs only core system components, disabling other features like applications and GPU drivers. |
 
 ## Automatic Install
 
@@ -130,19 +126,23 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/run.sh)" --
   ```
   cd ac
   ```
+
 - If you want to use your own dotfiles repository, change the `REPO_URL` into [tasks/dotfiles.sh](tasks/dotfiles.sh)
 
 - Give permission to execute
+
   ```
   chmod +x install.sh
   ```
 
 - Run
+
   ```
   ./install.sh
   ```
 
 - Or run with flags, just add them after the command.
+
   ```
   ./install.sh --skip-nvidia --skip-apps
   ```
