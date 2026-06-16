@@ -79,9 +79,9 @@ print_topic "Core"
 chmod +x "$TMP_DIR/tasks/core.sh"
 bash "$TMP_DIR/tasks/core.sh"
 
-print_topic "ZSH and Oh-My-Posh"
-chmod +x "$TMP_DIR/tasks/zsh.sh"
-bash "$TMP_DIR/tasks/zsh.sh"
+print_topic "Shell and Oh-My-Posh"
+chmod +x "$TMP_DIR/tasks/shell.sh"
+bash "$TMP_DIR/tasks/shell.sh"
 
 if [ "$SKIP_AMDGPU" = false ] && [ "$SKIP_GPU" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "GPU Drivers (AMD)"
