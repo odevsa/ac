@@ -50,69 +50,57 @@ done
 print_header "Let me do the hard work and go get some coffee" $BLUE
 
 print_topic "Pacman"
-chmod +x "$TMP_DIR/tasks/pacman.sh"
 bash "$TMP_DIR/tasks/pacman.sh"
 
 print_topic "Flatpak"
-chmod +x "$TMP_DIR/tasks/flatpak.sh"
 bash "$TMP_DIR/tasks/flatpak.sh"
 
 print_topic "Dotfiles"
-chmod +x "$TMP_DIR/tasks/dotfiles.sh"
 bash "$TMP_DIR/tasks/dotfiles.sh"
 
 print_topic "Core"
-chmod +x "$TMP_DIR/tasks/core.sh"
 bash "$TMP_DIR/tasks/core.sh"
 
 print_topic "Shell and Oh-My-Posh"
-chmod +x "$TMP_DIR/tasks/shell.sh"
 bash "$TMP_DIR/tasks/shell.sh"
 
 if [ "$SKIP_AMDGPU" = false ] && [ "$SKIP_GPU" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "GPU Drivers (AMD)"
-  chmod +x "$TMP_DIR/tasks/amdgpu.sh"
   bash "$TMP_DIR/tasks/amdgpu.sh"
 fi
 
 if [ "$SKIP_NVIDIA" = false ] && [ "$SKIP_GPU" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "GPU Drivers (NVIDIA)"
-  chmod +x "$TMP_DIR/tasks/nvidia.sh"
   bash "$TMP_DIR/tasks/nvidia.sh"
 fi
 
 print_topic "Fonts"
-chmod +x "$TMP_DIR/tasks/fonts.sh"
 bash "$TMP_DIR/tasks/fonts.sh"
+
+print_topic "Icons"
+bash "$TMP_DIR/tasks/icons.sh"
 
 if [ "$SKIP_APPS" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "Applications"
-  chmod +x "$TMP_DIR/tasks/applications.sh"
   bash "$TMP_DIR/tasks/applications.sh"
 fi
 
 if [ "$SKIP_DOCKER" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "Docker"
-  chmod +x "$TMP_DIR/tasks/docker.sh"
   bash "$TMP_DIR/tasks/docker.sh"
 fi
 
 print_topic "Browser"
-chmod +x "$TMP_DIR/tasks/browser.sh"
 bash "$TMP_DIR/tasks/browser.sh"
 
 if [ "$SKIP_PREFERENCES" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "Preferences"
-  chmod +x "$TMP_DIR/tasks/preferences.sh"
   bash "$TMP_DIR/tasks/preferences.sh"
-
-  chmod +x "$TMP_DIR/tasks/stl.sh"
   bash "$TMP_DIR/tasks/stl.sh"
 fi
 
 
 print_topic "Desktop Environment (Cosmic)"
-chmod +x "$TMP_DIR/tasks/cosmic.sh"
 bash "$TMP_DIR/tasks/cosmic.sh"
 
 # ###########################################################

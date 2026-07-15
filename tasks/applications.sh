@@ -6,7 +6,7 @@ source "helpers.sh"
 # Terminal applications
 # ###########################################################
 install_official \
-	"btop fastfetch nano" \
+	"btop fastfetch micro" \
 	"Installing terminal applications..."
 
 # ###########################################################

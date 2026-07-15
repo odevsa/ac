@@ -2,8 +2,6 @@
 set -euo pipefail
 source "helpers.sh"
 
-TMP_DIR_ANTIGEN="/tmp/.antigen"
-
 # ############################################################
 # Shell and helpers
 # ############################################################
