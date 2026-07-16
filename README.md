@@ -13,10 +13,10 @@ This is for my personal use and it's working in progress, so files can be delete
 <table style="border: none; border-collapse: collapse;">
   <tr>
     <td>
-      <img src="assets/screenshot-1.png" alt="Screenshot 1" />
+      <img src="public/images/screenshot-1.png" alt="Screenshot 1" />
     </td>
     <td>
-      <img src="assets/screenshot-2.png" alt="Screenshot 2" />
+      <img src="public/images/screenshot-2.png" alt="Screenshot 2" />
     </td>
   </tr>
 </table>
@@ -98,13 +98,13 @@ This is for my personal use and it's working in progress, so files can be delete
 Just run this code and see the magic
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/run.sh)"
+sh -c "$(curl -fsSL https://odevsa.github.io/arch-repo/install)"
 ```
 
 You may want to use flags to customize installation for example: If you don't want Nvidia driver and default applications, you can try:
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/run.sh)" -- --skip-nvidia --skip-apps
+sh -c "$(curl -fsSL https://odevsa.github.io/arch-repo/install)" -- --skip-nvidia --skip-apps
 ```
 
 ## Manual Install
@@ -132,19 +132,19 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/odevsa/ac/main/run.sh)" --
 - Give permission to execute
 
   ```
-  chmod +x install.sh
+  chmod +x install
   ```
 
 - Run
 
   ```
-  ./install.sh
+  ./install
   ```
 
 - Or run with flags, just add them after the command.
 
   ```
-  ./install.sh --skip-nvidia --skip-apps
+  ./install --skip-nvidia --skip-apps
   ```
 
 - Input password when it ask for

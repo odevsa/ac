@@ -22,4 +22,4 @@ git clone https://github.com/odevsa/ac.git "$TMP_DIR" &> /dev/null
 # ###########################################################
 # Run install script
 # ###########################################################
-(cd "$TMP_DIR" && chmod +x ./install.sh && bash ./install.sh "$@")
+(cd "$TMP_DIR" && bash ./install.sh "$@")

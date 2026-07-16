@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AC — Arch Cosmic DE</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <div class="logo">AC</div>
+        <div>
+          <h1>AC — Instalação do Arch + Cosmic DE</h1>
+          <p class="lead">
+            Instalação automática do Arch + Cosmic DE e dotfiles para Arch Linux
+            — script único, fácil e personalizável.
+          </p>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card">
+          <h2 style="margin: 0 0 8px">Instalação automática</h2>
+          <div class="install-command">
+            <code class="cmd" id="command"
+              >sh -c "$(curl -fsSL https://odevsa.github.io/ac/install)"</code
+            >
+            <div
+              style="
+                margin-left: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+              "
+            >
+              <button class="btn primary" id="copy">Copiar</button>
+            </div>
+          </div>
+
+          <form id="flags">
+            <label
+              ><input type="checkbox" value="--skip-amdgpu" />
+              --skip-amdgpu</label
+            >
+            <label
+              ><input type="checkbox" value="--skip-nvidia" />
+              --skip-nvidia</label
+            >
+            <label
+              ><input type="checkbox" value="--skip-gpu" /> --skip-gpu</label
+            >
+            <label
+              ><input type="checkbox" value="--skip-apps" /> --skip-apps</label
+            >
+            <label
+              ><input type="checkbox" value="--skip-docker" />
+              --skip-docker</label
+            >
+            <label
+              ><input type="checkbox" value="--skip-preferences" />
+              --skip-preferences</label
+            >
+            <label
+              ><input type="checkbox" value="--only-core" /> --only-core</label
+            >
+          </form>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Screenshots</h3>
+        <div class="gallery">
+          <img src="images/screenshot-1.png" alt="Screenshot 1" />
+          <img src="images/screenshot-2.png" alt="Screenshot 2" />
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Principais recursos</h3>
+        <ul class="features">
+          <li>Service para Reflector</li>
+          <li>Suporte a Flatpak</li>
+          <li>Instalação de codecs e multimídia</li>
+          <li>Drivers AMD / NVIDIA (opcional)</li>
+          <li>Cópia de dotfiles personalizados</li>
+          <li>Aplicativos populares e utilitários</li>
+        </ul>
+      </section>
+
+      <footer>
+        <div>
+          Repositório:
+          <a href="https://github.com/odevsa/ac" style="color: var(--accent)"
+            >github.com/odevsa/ac</a
+          >
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        const base =
+          'sh -c "$(curl -fsSL https://odevsa.github.io/ac/install)"';
+        const cmdEl = document.getElementById("command");
+        const copyBtn = document.getElementById("copy");
+        const flagsForm = document.getElementById("flags");
+
+        function buildCmd() {
+          if (!flagsForm) return base;
+          const checked = Array.from(
+            flagsForm.querySelectorAll('input[type="checkbox"]:checked'),
+          ).map((i) => i.value);
+          return checked.length ? base + " -- " + checked.join(" ") : base;
+        }
+
+        function refresh() {
+          cmdEl.textContent = buildCmd();
+        }
+
+        if (flagsForm) {
+          const allChecks = Array.from(
+            flagsForm.querySelectorAll('input[type="checkbox"]'),
+          );
+          const onlyCore = allChecks.find((i) => i.value === "--only-core");
+          const others = allChecks.filter((i) => i.value !== "--only-core");
+
+          allChecks.forEach((ch) => {
+            ch.addEventListener("change", (ev) => {
+              // enforce exclusivity rules
+              if (ch === onlyCore && ch.checked) {
+                others.forEach((o) => {
+                  o.checked = false;
+                });
+              } else if (ch !== onlyCore && ch.checked) {
+                if (onlyCore) onlyCore.checked = false;
+              }
+              refresh();
+            });
+          });
+        }
+
+        copyBtn.addEventListener("click", async function () {
+          const txt = buildCmd();
+          try {
+            await navigator.clipboard.writeText(txt);
+            this.textContent = "Copiado";
+            setTimeout(() => (this.textContent = "Copiar"), 1800);
+          } catch (e) {
+            alert("Não foi possível copiar.");
+          }
+        });
+
+        refresh();
+      })();
+    </script>
+  </body>
+</html>
