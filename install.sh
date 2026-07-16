@@ -44,6 +44,54 @@ for arg in "$@"; do
   esac
 done
 
+# If no flags were provided, ask the user which flags they want to use
+if [ "$#" -eq 0 ]; then
+  print_header "No flag provided" $YELLOW
+
+  print_topic "Asking which tasks to skip" $YELLOW
+
+  read -p "Run only the core (only core)? (y/N) " ANSWER
+  if [[ $ANSWER == [yY] ]]; then
+    ONLY_CORE=true
+  fi
+
+  if [ "$ONLY_CORE" = false ]; then
+    read -p "Skip all GPU drivers (AMD + NVIDIA)? (y/N) " ANSWER
+    if [[ $ANSWER == [yY] ]]; then
+      SKIP_GPU=true
+      SKIP_AMDGPU=true
+      SKIP_NVIDIA=true
+    fi
+
+    if [ "$SKIP_GPU" = false ]; then
+      read -p "Skip only AMDGPU drivers? (y/N) " ANSWER
+      if [[ $ANSWER == [yY] ]]; then
+        SKIP_AMDGPU=true
+      fi
+
+      read -p "Skip only NVIDIA drivers? (y/N) " ANSWER
+      if [[ $ANSWER == [yY] ]]; then
+        SKIP_NVIDIA=true
+      fi
+    fi
+
+    read -p "Skip applications installation? (y/N) " ANSWER
+    if [[ $ANSWER == [yY] ]]; then
+      SKIP_APPS=true
+    fi
+
+    read -p "Skip Docker? (y/N) " ANSWER
+    if [[ $ANSWER == [yY] ]]; then
+      SKIP_DOCKER=true
+    fi
+
+    read -p "Skip system preferences? (y/N) " ANSWER
+    if [[ $ANSWER == [yY] ]]; then
+      SKIP_PREFERENCES=true
+    fi
+  fi
+fi
+
 # ###########################################################
 # Running tasks
 # ###########################################################
