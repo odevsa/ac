@@ -9,16 +9,16 @@
   <body>
     <main>
       <header>
-        <h1>Instalação do Arch + Cosmic DE</h1>
+        <h1>Instalation do Arch + Cosmic DE</h1>
         <p class="lead">
-          Instalação automática do Arch + Cosmic DE e dotfiles para Arch Linux -
-          script único, fácil e personalizável.
+          Automatic installation of Arch + Cosmic DE and dotfiles for Arch Linux -
+          one script, easy and customizable.
         </p>
       </header>
 
       <section class="card">
         <div class="card">
-          <h2 style="margin: 0 0 8px">Instalação automática</h2>
+          <h2 style="margin: 0 0 8px">Automatic Installation</h2>
           <div class="install-command">
             <code class="cmd" id="command"
               >sh -c "$(curl -fsSL https://odevsa.github.io/ac/install)"</code
@@ -31,7 +31,7 @@
                 gap: 8px;
               "
             >
-              <button class="btn primary" id="copy">Copiar</button>
+              <button class="btn primary" id="copy">Copy</button>
             </div>
           </div>
 
@@ -74,20 +74,20 @@
       </section>
 
       <section class="card">
-        <h3>Principais recursos</h3>
+        <h3>Main features</h3>
         <ul class="features">
-          <li>Service para Reflector</li>
-          <li>Suporte a Flatpak</li>
-          <li>Instalação de codecs e multimídia</li>
-          <li>Drivers AMD / NVIDIA (opcional)</li>
-          <li>Cópia de dotfiles personalizados</li>
-          <li>Aplicativos populares e utilitários</li>
+          <li>Service for Reflector</li>
+          <li>Flatpak</li>
+          <li>Multimedia Codecs</li>
+          <li>Drivers AMD / NVIDIA (optional)</li>
+          <li>Customizable dotfiles</li>
+          <li>Popular Aplications and Utilities</li>
         </ul>
       </section>
 
       <footer>
         <div>
-          Repositório:
+          Repo:
           <a href="https://github.com/odevsa/ac" style="color: var(--accent)"
             >github.com/odevsa/ac</a
           >
@@ -141,10 +141,10 @@
           const txt = buildCmd();
           try {
             await navigator.clipboard.writeText(txt);
-            this.textContent = "Copiado";
-            setTimeout(() => (this.textContent = "Copiar"), 1800);
+            this.textContent = "Copied";
+            setTimeout(() => (this.textContent = "Copy"), 1800);
           } catch (e) {
-            alert("Não foi possível copiar.");
+            alert("Wasn't possible to copy.");
           }
         });
 
