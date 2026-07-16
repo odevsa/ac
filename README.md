@@ -2,6 +2,8 @@
 
 A simple intallation of Cosmic Desktop Environment with my Dotfiles into Arch Linux and automated by shell script.
 
+Website: https://odevsa.github.io/ac
+
 My Dotfiles are here: https://github.com/odevsa/dotfiles
 
 ## Disclaimer
@@ -13,10 +15,10 @@ This is for my personal use and it's working in progress, so files can be delete
 <table style="border: none; border-collapse: collapse;">
   <tr>
     <td>
-      <img src="public/images/screenshot-1.png" alt="Screenshot 1" />
+      <img src="docs/images/screenshot-1.png" alt="Screenshot 1" />
     </td>
     <td>
-      <img src="public/images/screenshot-2.png" alt="Screenshot 2" />
+      <img src="docs/images/screenshot-2.png" alt="Screenshot 2" />
     </td>
   </tr>
 </table>
