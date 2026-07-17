@@ -144,9 +144,8 @@ bash "$TMP_DIR/tasks/browser.sh"
 if [ "$SKIP_PREFERENCES" = false ] && [ "$ONLY_CORE" = false ]; then
   print_topic "Preferences"
   bash "$TMP_DIR/tasks/preferences.sh"
-  bash "$TMP_DIR/tasks/stl.sh"
+  # bash "$TMP_DIR/tasks/stl.sh"
 fi
-
 
 print_topic "Desktop Environment (Cosmic)"
 bash "$TMP_DIR/tasks/cosmic.sh"
