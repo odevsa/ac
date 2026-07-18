@@ -7,28 +7,29 @@ BLUE=`tput setaf 4`
 NOCOLOR=`tput sgr0`
 
 print_center(){
-    local x
-    local y
+    local text cols padding
     text="$*"
-    x=$(( ($(tput cols) - ${#text}) / 2))
-    echo -ne "\E[6n";read -sdR y; y=$(echo -ne "${y#*[}" | cut -d';' -f1)
-    echo -ne "\033[${y};${x}f$*"
-    echo
+    cols=$(tput cols 2>/dev/null || echo 80)
+    padding=$(( (cols - ${#text}) / 2 ))
+    if [ "$padding" -lt 0 ]; then padding=0; fi
+    printf '%*s%s\n' "$padding" "" "$text"
 }
 
 print_topic(){
-    LINE_CHAR=${3:-―}
-    printf ${2:-$NOCOLOR}
-    eval printf %.0s$LINE_CHAR '{1..'"${COLUMNS:-$(tput cols)}"\}; echo
-    print_center $1
-    eval printf %.0s$LINE_CHAR '{1..'"${COLUMNS:-$(tput cols)}"\}; echo
-    printf $NOCOLOR
+    local line_char cols i
+    line_char=${3:-'-'}
+    cols=$(tput cols 2>/dev/null || echo 80)
+    printf "%s" "${2:-$NOCOLOR}"
+    for ((i=0;i<cols;i++)); do printf '%s' "${line_char}"; done; printf '\n'
+    print_center "$1"
+    for ((i=0;i<cols;i++)); do printf '%s' "${line_char}"; done; printf '\n'
+    printf "%s" "$NOCOLOR"
 }
 
 print_header(){
     print_topic "$1" ${2:-$NOCOLOR} █
 }
-
+    
 install_official() {
     local package="$1"
     local message="${2:-}"
