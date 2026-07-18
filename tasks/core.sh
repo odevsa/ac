@@ -68,11 +68,8 @@ install_official \
 # ###########################################################
 # Enable services
 # ###########################################################
-echo "=> Enabling and starting NetworkManager services..."
-sudo systemctl enable --now "NetworkManager" &> /dev/null || true
+enable_start_service "NetworkManager"
 
-echo "=> Enabling and starting Bluetooth services..."
-sudo systemctl enable --now "bluetooth" &> /dev/null || true
+enable_start_service "bluetooth"
 
-echo "=> Enabling and starting systemd-resolved services..."
-sudo systemctl enable --now "systemd-resolved" &> /dev/null || true
+enable_start_service "systemd-resolved"

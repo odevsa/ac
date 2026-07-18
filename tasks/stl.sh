@@ -11,7 +11,7 @@ TMP_DIR_THUMBNAIL="/tmp/stl-thumb"
 # STL packages
 # ###########################################################
 if command -v stl-thumb &> /dev/null && command -v fstl &> /dev/null; then
-	echo "=> STL packages are already installed."
+	log "STL packages are already installed."
 	exit 0
 fi
 
@@ -20,21 +20,22 @@ fi
 # ###########################################################
 install_official \
 	"base-devel rust cmake git" \
-	"Installing dependencies..."
+	"Verifying dependencies..." \
+	true
 
 # ###########################################################
 # Clone repository for Viewer
 # ###########################################################
-echo "=> Removing old $TMP_DIR_VIEWER..."
+log "Removing old $TMP_DIR_VIEWER..."
 sudo rm -rf "$TMP_DIR_VIEWER" || true
 
-echo "=> Cloning fstl repository..."
+log "Cloning fstl repository..."
 git clone "$REPO_URL_VIEWER" "$TMP_DIR_VIEWER" &> /dev/null || true
 
 # ###########################################################
 # Build and install fstl
 # ###########################################################
-echo "=> Building and installing fstl..."
+log "Building and installing fstl..."
 (
 	cd "$TMP_DIR_VIEWER"
 	mkdir -p build
@@ -47,7 +48,7 @@ echo "=> Building and installing fstl..."
 # ###########################################################
 # Register desktop entry for fstl
 # ###########################################################
-echo "=> Registering fstl as the default STL viewer..."
+log "Registering fstl as the default STL viewer..."
 sudo bash -c 'cat << EOF > /usr/share/applications/fstl.desktop
 [Desktop Entry]
 Name=fstl
@@ -61,7 +62,15 @@ sudo update-desktop-database /usr/share/applications
 # ###########################################################
 # Register fstl as default STL viewer
 # ###########################################################
-if [ -f "$HOME/.config/mimeapps.list" ]; then
+log "Setting fstl as the default STL viewer..."
+if [ ! -f "$HOME/.config/mimeapps.list" ]; then
+	cat << EOF > "$HOME/.config/mimeapps.list"
+[Default Applications]
+model/stl=fstl.desktop
+model/x.stl-binary=fstl.desktop
+model/x.stl-ascii=fstl.desktop=fstl.desktop
+EOF
+else
 	if ! grep -q "\[Default Applications\]" "$HOME/.config/mimeapps.list"; then
 		echo "[Default Applications]" >> "$HOME/.config/mimeapps.list"
 	fi
@@ -71,29 +80,22 @@ if [ -f "$HOME/.config/mimeapps.list" ]; then
 		echo "model/x.stl-binary=fstl.desktop" >> "$HOME/.config/mimeapps.list"
 		echo "model/x.stl-ascii=fstl.desktop" >> "$HOME/.config/mimeapps.list"
 	fi
-else
-	cat << EOF > "$HOME/.config/mimeapps.list"
-[Default Applications]
-model/stl=fstl.desktop
-model/x.stl-binary=fstl.desktop
-model/x.stl-ascii=fstl.desktop=fstl.desktop
-EOF
 fi
 
 
 # ###########################################################
 # Clone repository for Thumbnailer
 # ###########################################################
-echo "=> Removing old $TMP_DIR_THUMBNAIL..."
+log "Removing old $TMP_DIR_THUMBNAIL..."
 sudo rm -rf "$TMP_DIR_THUMBNAIL" || true
 
-echo "=> Cloning stl-thumb repository..."
+log "Cloning stl-thumb repository..."
 git clone "$REPO_URL_THUMBNAIL" "$TMP_DIR_THUMBNAIL" &> /dev/null || true
 
 # ###########################################################
 # Build and install stl-thumb
 # ###########################################################
-echo "=> Building and installing stl-thumb..."
+log "Building and installing stl-thumb..."
 (
 	cd "$TMP_DIR_THUMBNAIL"
 	cargo build --release
@@ -103,9 +105,7 @@ echo "=> Building and installing stl-thumb..."
 # ###########################################################
 # Register Thumbnailer
 # ###########################################################
-echo "=> Registering stl-thumb as a thumbnailer..."
-
-# colocar no sudo
+log "Registering stl-thumb as a thumbnailer..."
 sudo bash -c 'cat << EOF > /usr/share/thumbnailers/stl-thumb.thumbnailer
 [Thumbnailer Entry]
 TryExec=stl-thumb

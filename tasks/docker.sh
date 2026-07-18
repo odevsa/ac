@@ -10,13 +10,17 @@ install_official \
   "Installing Docker and docker-compose..."
 
 # ###########################################################
-# Enable services
-# ###########################################################
-echo "=> Enabling and starting Docker service..."
-sudo systemctl enable --now docker &> /dev/null || true
-
-# ###########################################################
 # Add user to docker group
 # ###########################################################
-echo "=> Adding current user to docker group..."
-sudo usermod -aG docker "$USER" || true
+log "Adding current user to docker group..."
+if ! groups "$USER" | grep -q "\bdocker\b"; then
+  sudo usermod -aG docker "$USER" || true
+  log_sub "User '$USER' added to 'docker' group successfully." success
+else
+  log_sub "User '$USER' is already in the 'docker' group." warning
+fi
+
+# ###########################################################
+# Enable services
+# ###########################################################
+enable_start_service "docker"

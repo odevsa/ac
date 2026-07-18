@@ -12,20 +12,24 @@ install_official \
 # ###########################################################
 # Enable services
 # ###########################################################
-echo "=> Enabling cosmic-greeter service..."
-sudo systemctl enable cosmic-greeter &> /dev/null || true
-
+enable_service "cosmic-greeter"
 
 # ###########################################################
 # Enable quiet boot
 # ###########################################################
 CMDLINE_FILE="/etc/kernel/cmdline"
 PARAMS="quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0"
-echo "=> Enabling quiet boot..."
+log "Enabling quiet boot..."
 if sudo grep -Eq '\bquiet\b' "$CMDLINE_FILE"; then
-  echo "   - already has 'quiet', skipping"
+  log_sub "Already has 'quiet', skipping" warning
 else
   sudo sed -E -i "s/$/ $PARAMS/" "$CMDLINE_FILE" || true
-  sudo mkinitcpio -P &> /dev/null || true
-  echo "   - added 'quiet' to boot options"
+  log_sub "Added 'quiet' to boot options" success
 fi
+
+# ###########################################################
+# Regenerate initramfs
+# ###########################################################
+log "Regenerating initramfs..."
+sudo mkinitcpio -P &> /dev/null || true
+log_sub "Initramfs regenerated successfully." success

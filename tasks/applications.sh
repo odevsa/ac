@@ -33,5 +33,10 @@ install_official \
 # ###########################################################
 # Create applications.menu symlink
 # ###########################################################
-echo "=> Creating applications.menu symlink"
-sudo ln -sf /etc/xdg/menus/gnome-applications.menu /etc/xdg/menus/applications.menu || true
+log "Creating applications.menu symlink"
+if [ ! -f /etc/xdg/menus/applications.menu ]; then
+	sudo ln -sf /etc/xdg/menus/gnome-applications.menu /etc/xdg/menus/applications.menu
+	log_sub "Created applications.menu symlink" success
+else
+	log_sub "'applications.menu' symlink already exists" warning
+fi

@@ -12,5 +12,6 @@ install_official \
 # ###########################################################
 # Flathub remote
 # ###########################################################
-echo "=> Adding flathub remote..."
+log "Adding flathub remote..."
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo &> /dev/null || true
+log_sub "Flathub remote added." success

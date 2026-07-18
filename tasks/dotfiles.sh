@@ -10,35 +10,49 @@ TMP_DIR=/tmp/dotfiles
 # ###########################################################
 install_official \
 	"git" \
-	"Installing dependencies..."
+	"Verifying dependencies..." \
+	true
 
 # ###########################################################
 # Clone repository dotfiles
 # ###########################################################
-echo "=> Removing old $TMP_DIR..."
-sudo rm -rf "$TMP_DIR" || true
+log "Cloning dotfiles repository to '$TMP_DIR'..."
 
-echo "=> Cloning dotfiles repository..."
+if [ -d "$TMP_DIR" ]; then
+	sudo rm -rf "$TMP_DIR" || true
+	log_sub "Removed old $TMP_DIR"
+fi
+
 git clone "$REPO_URL" "$TMP_DIR" &> /dev/null || true
+log_sub "Cloned dotfiles repository" success
 
 # ###########################################################
 # Replace {user} placeholders
 # ###########################################################
-echo "=> Replacing {user} placeholders..."
+log "Replacing {user} placeholders..."
 find "$TMP_DIR" -type f -exec sed -i "s/{user}/$USER/g" '{}' \; || true
+log_sub "Replaced {user} placeholders to '$USER'." success
 
 # ############################################################
 # Copy dotfiles to home
 # ############################################################
-echo "=> Copying dotfiles to home..."
+log "Copying dotfiles to '$HOME'..."
+
 cp -r "$TMP_DIR/." "$HOME/" || true
+log_sub "Copied dotfiles to '$HOME'." success
+
 (cd "$HOME" && sudo rm -rf ~/.git ~/install.sh ~/README.md) || true
+log_sub "Removed unnecessary files from '$HOME'." success
 
 # ############################################################
 # Copy dotfiles to root
 # ############################################################
-echo "=> Copying fish and oh-my-posh to root..."
+log "Copying fish and oh-my-posh to /root..."
+
 sudo mkdir -p /root/.config/fish
 sudo cp -r "$TMP_DIR/.config/fish/." /root/.config/fish/ || true
+log_sub "Copied fish configuration to '/root'." success
+
 sudo mkdir -p /root/.config/oh-my-posh
 sudo cp -r "$TMP_DIR/.config/oh-my-posh/." /root/.config/oh-my-posh/ || true
+log_sub "Copied oh-my-posh configuration to '/root'." success
