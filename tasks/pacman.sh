@@ -33,5 +33,4 @@ fi
 # General packages
 # ###########################################################
 echo "=> Updating cache and upgrading packages..."
-sudo pacman -Syu --noconfirm \
-  &> /dev/null
+sudo pacman -Syu --noconfirm &> /dev/null

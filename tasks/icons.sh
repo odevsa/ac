@@ -20,6 +20,6 @@ echo '"Papirus"' > ~/.config/cosmic/com.system76.CosmicTk/v1/icon_theme
 # Folder color
 # ###########################################################
 echo "=> Setting folder color..."
-sudo curl -Lo /usr/bin/papirus-folders https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/papirus-folders
-sudo chmod +x /usr/bin/papirus-folders
+sudo curl -Lo /usr/bin/papirus-folders https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/papirus-folders &> /dev/null || true
+sudo chmod +x /usr/bin/papirus-folders &> /dev/null || true
 /usr/bin/papirus-folders -C black

@@ -6,7 +6,7 @@ source "helpers.sh"
 # Cosmic Desktop Environment
 # ###########################################################
 install_official \
-  "cosmic power-profiles-daemon" \
+  "cosmic power-profiles-daemon xdg-user-dirs" \
   "Installing Cosmic Desktop Environment..."
 
 # ###########################################################
@@ -17,19 +17,15 @@ sudo systemctl enable cosmic-greeter &> /dev/null || true
 
 
 # ###########################################################
-# Enable quiet boot for Cosmic greeter
+# Enable quiet boot
 # ###########################################################
-echo "=> Updating boot entries for quiet mode..."
-BOOT_DIR=/boot/loader/entries
-PATTERN='*linux*.conf'
-if compgen -G "$BOOT_DIR/$PATTERN" > /dev/null; then
-  for f in $BOOT_DIR/$PATTERN; do
-    echo "=> Processing $f"
-    if sudo grep -Eq '\bquiet\b' "$f"; then
-      echo "   - already has 'quiet', skipping"
-      continue
-    fi
-    sudo sed -E -i "s/^(options[[:space:]].*)$/\1 quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3/" "$f" || true
-    echo "   - added 'quiet' to boot options"
-  done
+CMDLINE_FILE="/etc/kernel/cmdline"
+PARAMS="quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0"
+echo "=> Enabling quiet boot..."
+if sudo grep -Eq '\bquiet\b' "$CMDLINE_FILE"; then
+  echo "   - already has 'quiet', skipping"
+else
+  sudo sed -E -i "s/$/ $PARAMS/" "$CMDLINE_FILE" || true
+  sudo mkinitcpio -P &> /dev/null || true
+  echo "   - added 'quiet' to boot options"
 fi

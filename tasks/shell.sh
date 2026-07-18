@@ -3,11 +3,11 @@ set -euo pipefail
 source "helpers.sh"
 
 # ############################################################
-# Shell and helpers
+# Shell and utilities
 # ############################################################
 install_official \
   "fish lsd bat" \
-  "Installing shell and helpers..."
+  "Installing shell and utilities..."
 
 # ############################################################
 # Set default shell to fish for current user and root

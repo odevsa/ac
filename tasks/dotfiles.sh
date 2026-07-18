@@ -37,7 +37,8 @@ cp -r "$TMP_DIR/." "$HOME/" || true
 # ############################################################
 # Copy dotfiles to root
 # ############################################################
-echo "=> Copying .zshrc and oh-my-posh to root..."
-sudo cp "$TMP_DIR/.zshrc" /root/.zshrc || true
+echo "=> Copying fish and oh-my-posh to root..."
+sudo mkdir -p /root/.config/fish
+sudo cp -r "$TMP_DIR/.config/fish/." /root/.config/fish/ || true
 sudo mkdir -p /root/.config/oh-my-posh
 sudo cp -r "$TMP_DIR/.config/oh-my-posh/." /root/.config/oh-my-posh/ || true
