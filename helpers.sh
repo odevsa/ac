@@ -6,7 +6,7 @@ GREEN=`tput setaf 2`
 YELLOW=`tput setaf 3`
 BLUE=`tput setaf 4`
 GRAY=`tput setaf 8`
-TOTAL_COLUMNS=$(tput cols 2>/dev/null || echo 80)
+TOTAL_COLUMNS=$(tput cols 2>/dev/null || echo 100)
 TOTAL_CONTENT_COLUMNS=$((TOTAL_COLUMNS - 4))
 
 get_plain_text(){
