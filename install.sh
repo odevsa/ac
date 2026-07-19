@@ -57,18 +57,25 @@ if [ "$DEFAULT" = false ] && [ "$#" -eq 0 ]; then
   print_header "Do you want to skip any tasks?" warning
 
   print_start
-    ANSWER=$(ask "Run only the core (only core)? (y/N)" warning)
+    QUESTION="Run only the core (only core)? (y/N)"
+    ANSWER=$(ask "$QUESTION" warning)
+    asked_rewrite "$QUESTION" "$ANSWER"
     if [[ $ANSWER == [yY] ]]; then
       ONLY_CORE=true
     fi
 
     if [ "$ONLY_CORE" = false ]; then
-      ANSWER=$(ask "Skip dotfiles installation? (y/N)" warning)
+      QUESTION="Skip dotfiles installation? (y/N)"
+      ANSWER=$(ask "$QUESTION" warning)
+      asked_rewrite "$QUESTION" "$ANSWER"
       if [[ $ANSWER == [yY] ]]; then
         SKIP_DOTFILES=true
       fi
 
-      ANSWER=$(ask "Skip all GPU drivers (AMD + NVIDIA)? (y/N)" warning)
+
+      QUESTION="Skip all GPU drivers (AMD + NVIDIA)? (y/N)"
+      ANSWER=$(ask "$QUESTION" warning)
+      asked_rewrite "$QUESTION" "$ANSWER"
       if [[ $ANSWER == [yY] ]]; then
         SKIP_GPU=true
         SKIP_AMDGPU=true
@@ -76,28 +83,38 @@ if [ "$DEFAULT" = false ] && [ "$#" -eq 0 ]; then
       fi
 
       if [ "$SKIP_GPU" = false ]; then
-        ANSWER=$(ask "Skip only AMDGPU drivers? (y/N)" warning)
+        QUESTION="Skip only AMDGPU drivers? (y/N)"
+        ANSWER=$(ask "$QUESTION" warning)
+        asked_rewrite "$QUESTION" "$ANSWER"
         if [[ $ANSWER == [yY] ]]; then
           SKIP_AMDGPU=true
         fi
 
-        ANSWER=$(ask "Skip only NVIDIA drivers? (y/N)" warning)
+        QUESTION="Skip only NVIDIA drivers? (y/N)"
+        ANSWER=$(ask "$QUESTION" warning)
+        asked_rewrite "$QUESTION" "$ANSWER"
         if [[ $ANSWER == [yY] ]]; then
           SKIP_NVIDIA=true
         fi
       fi
 
-      ANSWER=$(ask "Skip applications installation? (y/N)" warning)
+      QUESTION="Skip applications installation? (y/N)"
+      ANSWER=$(ask "$QUESTION" warning)
+      asked_rewrite "$QUESTION" "$ANSWER"
       if [[ $ANSWER == [yY] ]]; then
         SKIP_APPS=true
       fi
 
-      ANSWER=$(ask "Skip Docker installation? (y/N)" warning)
+      QUESTION="Skip Docker installation? (y/N)"
+      ANSWER=$(ask "$QUESTION" warning)
+      asked_rewrite "$QUESTION" "$ANSWER"
       if [[ $ANSWER == [yY] ]]; then
         SKIP_DOCKER=true
       fi
 
-      ANSWER=$(ask "Skip preferences? (y/N)" warning)
+      QUESTION="Skip preferences? (y/N)"
+      ANSWER=$(ask "$QUESTION" warning)
+      asked_rewrite "$QUESTION" "$ANSWER"
       if [[ $ANSWER == [yY] ]]; then
         SKIP_PREFERENCES=true
       fi
@@ -218,7 +235,9 @@ run_task "Desktop Environment (Cosmic)" "$TMP_DIR/tasks/cosmic.sh"
 # ###########################################################
 print_header "Finished!" success
 print_start
-  ANSWER=$(ask "Reboot now? (Y/n)" success)
+  QUESTION="Reboot now? (Y/n)"
+  ANSWER=$(ask "$QUESTION" success)
+  asked_rewrite "$QUESTION" "$ANSWER"
   if [ "$ANSWER" == "y" ] || [ "$ANSWER" == "Y" ] || [ -z "$ANSWER" ]; then
     log_sub "Rebooting..." info
     sudo reboot

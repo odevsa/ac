@@ -9,6 +9,10 @@ GRAY=`tput setaf 8`
 TOTAL_COLUMNS=$(tput cols 2>/dev/null || echo 80)
 TOTAL_CONTENT_COLUMNS=$((TOTAL_COLUMNS - 4))
 
+get_plain_text(){
+    echo -e "$1" | sed 's/\x1B\[[0-9;]*[JKmsu]//g'
+}
+
 get_color(){
     case "$1" in
         warning) color="$YELLOW" ;;
@@ -86,7 +90,7 @@ print_start(){
 
 print_content(){
     text="$1"
-    plain_text=$(echo -e "$text" | sed 's/\x1B\[[0-9;]*[JKmsu]//g')
+    plain_text=$(get_plain_text "$text")
     padding_increment=$((TOTAL_CONTENT_COLUMNS - ${#plain_text}))
     printf "$GRAY"
     printf "░░"
@@ -128,6 +132,21 @@ ask(){
     color=$(get_color "${2:-}")
     read -p "$GRAY░░   $color➤  $1: $NOCOLOR" answer
     printf "$answer"
+}
+
+asked_rewrite(){
+    tput cuu1
+    answer="${2:-}"
+    answer_color=$RED
+    if [[ $answer == [yY] ]]; then
+        answer_color=$GREEN
+    fi
+    text="   $GRAY➤  $1: $answer_color$answer"
+    plain_text=$(get_plain_text "$text")
+    padding_increment=$((TOTAL_CONTENT_COLUMNS - ${#plain_text}))
+    printf "$GRAY░░$text$NOCOLOR"
+    print_repeat " " "$padding_increment"
+    printf "$GRAY░░\n$NOCOLOR"
 }
 
 install_official() {
