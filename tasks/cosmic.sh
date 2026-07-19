@@ -32,4 +32,4 @@ fi
 # ###########################################################
 log "Regenerating initramfs..."
 sudo mkinitcpio -P &> /dev/null || true
-log_sub "Initramfs regenerated successfully." success
+log_sub "Regenerated initramfs." success

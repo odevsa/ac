@@ -18,14 +18,14 @@ if [ "$SHELL" != "/usr/bin/fish" ]; then
   chsh -s $(which fish) "$USER" &> /dev/null || true
   log_sub "Set default shell for $USER to /usr/bin/fish." success
 else
-  log_sub "Default shell for $USER is already /usr/bin/fish." muted
+  log_sub "Default shell for $USER is already /usr/bin/fish." warning
 fi
 
 if [ "$(sudo getent passwd root | cut -d: -f7)" != "/usr/bin/fish" ]; then
   sudo chsh -s $(which fish) root &> /dev/null || true
   log_sub "Set default shell for root to /usr/bin/fish." success
 else
-  log_sub "Default shell for root is already /usr/bin/fish." muted
+  log_sub "Default shell for root is already /usr/bin/fish." warning
 fi
 
 # ############################################################
