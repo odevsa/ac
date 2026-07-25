@@ -26,21 +26,6 @@ print_start
   fi
 
   # ###########################################################
-  # Auto logon
-  # ###########################################################
-  FILE="/etc/greetd/cosmic-greeter.toml"
-  log "Configuring auto logon..."
-  if ! grep -q '^\[initial_session\]' "$FILE"; then
-    sudo cp "$FILE" "$FILE.bak"
-    log_sub "Backup of $FILE created at $FILE.bak"
-    sudo sed -i '/^\[initial_session\]/,/^$/d' "$FILE"
-    echo -e "[initial_session]\ncommand = \"start-cosmic\"\nuser = \"$USER\"\n\n$(cat "$FILE")" | sudo tee "$FILE" > /dev/null
-    log_sub "Auto logon configured successfully." success
-  else
-    log_sub "Auto logon is already configured." warning
-  fi
-
-  # ###########################################################
   # Android Emulator .desktop file
   # ###########################################################
   log "Creating Android Emulator .desktop file..."

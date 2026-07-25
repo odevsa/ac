@@ -2,7 +2,6 @@
 set -euo pipefail
 source "helpers.sh"
 source "logo.sh"
-sudo -v
 
 # ###########################################################
 # Logo
@@ -131,6 +130,8 @@ fi
 # ###########################################################
 # Running tasks
 # ###########################################################
+sudo -v
+
 print_header "Let me do the hard work and go get some coffee" info
 print_start
   flags=""
