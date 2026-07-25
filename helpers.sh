@@ -129,8 +129,12 @@ log_sub(){
 }
 
 ask(){
-    color=$(get_color "${2:-}")
+    local color=$(get_color "${2:-}")
+    default_answer="${3:-}"
     read -p "$GRAY░░   $color➤  $1: $NOCOLOR" answer
+    if [ -z "$answer" ]; then
+        answer="$default_answer"
+    fi
     printf "$answer"
 }
 
