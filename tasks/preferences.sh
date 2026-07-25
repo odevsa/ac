@@ -50,14 +50,3 @@ if ! groups $USER | grep -q "\buucp\b"; then
 else
   log_sub "'$USER' is already in the 'uucp' group." warning
 fi
-
-# ###########################################################
-# Open Blender in window mode by default
-# ###########################################################
-log "Setting Blender to open in window mode by default..."
-if ! grep -q "Exec=blender -w" /usr/share/applications/blender.desktop; then
-  sudo sed -i 's/Exec=blender/Exec=blender -w/g' /usr/share/applications/blender.desktop
-  log_sub "Blender set to open in window mode." success
-else
-  log_sub "Blender already set to open in window mode." warning
-fi
