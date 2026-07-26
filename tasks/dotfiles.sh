@@ -49,6 +49,9 @@ log_sub "Removed unnecessary files from '$HOME'." success
 # ############################################################
 log "Copying fish and oh-my-posh to /root..."
 
+sudo cp "$TMP_DIR/.zshrc" /root/ || true
+log_sub "Copied zsh configuration to '/root'." success
+
 sudo mkdir -p /root/.config/fish
 sudo cp -r "$TMP_DIR/.config/fish/." /root/.config/fish/ || true
 log_sub "Copied fish configuration to '/root'." success

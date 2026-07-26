@@ -2,6 +2,7 @@
 set -euo pipefail
 source "helpers.sh"
 source "logo.sh"
+reset
 
 # ###########################################################
 # Logo
