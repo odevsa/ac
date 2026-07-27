@@ -56,6 +56,9 @@ sudo mkdir -p /root/.config/fish
 sudo cp -r "$TMP_DIR/.config/fish/." /root/.config/fish/ || true
 log_sub "Copied fish configuration to '/root'." success
 
+sudo cp "$TMP_DIR/.bashrc" /root/ || true
+log_sub "Copied bash configuration to '/root'." success
+
 sudo mkdir -p /root/.config/oh-my-posh
 sudo cp -r "$TMP_DIR/.config/oh-my-posh/." /root/.config/oh-my-posh/ || true
 log_sub "Copied oh-my-posh configuration to '/root'." success
