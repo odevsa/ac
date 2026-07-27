@@ -141,9 +141,11 @@ ask(){
 asked_rewrite(){
     tput cuu1
     answer="${2:-}"
-    answer_color=$RED
+    answer_color=$BLUE
     if [[ $answer == [yY] ]]; then
         answer_color=$GREEN
+    elif [[ $answer == [nN] ]]; then
+        answer_color=$RED
     fi
     text="   $GRAY➤  $1: $answer_color$answer"
     plain_text=$(get_plain_text "$text")
@@ -218,7 +220,8 @@ run_task(){
   script="$2"
   print_topic "$name"
   print_start
-  bash "$script"
+  
+  bash "$script" ${3:-} ${4:-} ${5:-} ${6:-} ${7:-}
   print_end
 }
 

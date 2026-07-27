@@ -11,8 +11,8 @@
       <header>
         <h1>Instalation do Arch + Cosmic DE</h1>
         <p class="lead">
-          Automatic installation of Arch + Cosmic DE and dotfiles for Arch Linux -
-          one script, easy and customizable.
+          Automatic installation of Arch + Cosmic DE and dotfiles for Arch Linux
+          - one script, easy and customizable.
         </p>
       </header>
 
@@ -36,31 +36,7 @@
           </div>
 
           <form id="flags">
-            <label
-              ><input type="checkbox" value="--skip-amdgpu" />
-              --skip-amdgpu</label
-            >
-            <label
-              ><input type="checkbox" value="--skip-nvidia" />
-              --skip-nvidia</label
-            >
-            <label
-              ><input type="checkbox" value="--skip-gpu" /> --skip-gpu</label
-            >
-            <label
-              ><input type="checkbox" value="--skip-apps" /> --skip-apps</label
-            >
-            <label
-              ><input type="checkbox" value="--skip-docker" />
-              --skip-docker</label
-            >
-            <label
-              ><input type="checkbox" value="--skip-preferences" />
-              --skip-preferences</label
-            >
-            <label
-              ><input type="checkbox" value="--only-core" /> --only-core</label
-            >
+            <label><input type="checkbox" value="--default" /> --default</label>
           </form>
         </div>
       </section>
@@ -119,18 +95,13 @@
           const allChecks = Array.from(
             flagsForm.querySelectorAll('input[type="checkbox"]'),
           );
-          const onlyCore = allChecks.find((i) => i.value === "--only-core");
-          const others = allChecks.filter((i) => i.value !== "--only-core");
 
           allChecks.forEach((ch) => {
             ch.addEventListener("change", (ev) => {
-              // enforce exclusivity rules
-              if (ch === onlyCore && ch.checked) {
-                others.forEach((o) => {
-                  o.checked = false;
+              if (ch.checked) {
+                allChecks.forEach((o) => {
+                  if (o !== ch) o.checked = false;
                 });
-              } else if (ch !== onlyCore && ch.checked) {
-                if (onlyCore) onlyCore.checked = false;
               }
               refresh();
             });

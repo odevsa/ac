@@ -8,20 +8,20 @@ REPO_URL_THUMBNAIL="https://github.com/unlimitedbacon/stl-thumb.git"
 TMP_DIR_THUMBNAIL="/tmp/stl-thumb"
 
 # ###########################################################
-# STL packages
-# ###########################################################
-if command -v stl-thumb &> /dev/null && command -v fstl &> /dev/null; then
-	log "STL packages are already installed."
-	exit 0
-fi
-
-# ###########################################################
 # Dependencies packages
 # ###########################################################
 install_official \
 	"base-devel rust cmake git" \
 	"Verifying dependencies..." \
 	true
+
+# ###########################################################
+# STL packages
+# ###########################################################
+if command -v stl-thumb &> /dev/null && command -v fstl &> /dev/null; then
+	log "STL packages are already installed."
+	exit 0
+fi
 
 # ###########################################################
 # Clone repository for Viewer

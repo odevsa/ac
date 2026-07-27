@@ -34,11 +34,12 @@ This is for my personal use and it's working in progress, so files can be delete
 - [x] Filesystem (dosfstools exfatprogs xfsprogs...)
 - [x] Multimedia core (mesa, vulkan, network, bluetooth, pipewire...)
 - [x] Popular development packages (git, rust, python, nodejs...)
-- [x] Shell (fish, set as default, oh-my-posh)
+- [x] Shell (zsh, fish, set as default, oh-my-posh)
+- [x] Fonts (font-awesome, firacode-nerd, noto-fonts-cjk...)
+- [x] Icons (papirus)
 - [x] 🏳️ - Amdgpu GPU Drivers
 - [x] 🏳️ - Nvidia GPU Drivers
-- [x] Fonts (font-awesome, firacode-nerd, noto-fonts-cjk...)
-- [x] Terminal Applications (fastfetch, btop...)
+- [x] 🏳️ Terminal Applications (fastfetch, btop...)
 - [x] 🏳️ - Utilities Applications (nautilus, file-roller, snapshot, totem...)
 - [x] 🏳️ - Graphical Applications (gimp, inkscape)
 - [x] 🏳️ - 3D Applications (blender, freecad)
@@ -85,15 +86,9 @@ This is for my personal use and it's working in progress, so files can be delete
 
 ## Flags
 
-| Flag                 | Description                                                                                       |
-| -------------------- | ------------------------------------------------------------------------------------------------- |
-| `--skip-amdgpu`      | Skip AMD GPU (amdgpu) installation task.                                                          |
-| `--skip-nvidia`      | Skip NVIDIA GPU (nvidia) installation task.                                                       |
-| `--skip-gpu`         | Skip both AMD and NVIDIA GPUs installation task.                                                  |
-| `--skip-apps`        | Skip all application-related installation task.                                                   |
-| `--skip-docker`      | Skip Docker installation task.                                                                    |
-| `--skip-preferences` | Skip preferences task.                                                                            |
-| `--only-core`        | Installs only core system components, disabling other features like applications and GPU drivers. |
+| Flag        | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `--default` | Skip asks and start with default decisions task. |
 
 ## Automatic Install
 
@@ -103,10 +98,10 @@ Just run this code and see the magic
 sh -c "$(curl -fsSL https://odevsa.github.io/arch-repo/install)"
 ```
 
-You may want to use flags to customize installation for example: If you don't want Nvidia driver and default applications, you can try:
+You may want to use flags to customize installation for example: If you want to skip question and install with default decisions, you can try:
 
 ```
-sh -c "$(curl -fsSL https://odevsa.github.io/arch-repo/install)" -- --skip-nvidia --skip-apps
+sh -c "$(curl -fsSL https://odevsa.github.io/arch-repo/install)" -- --default
 ```
 
 ## Manual Install
@@ -146,7 +141,5 @@ sh -c "$(curl -fsSL https://odevsa.github.io/arch-repo/install)" -- --skip-nvidi
 - Or run with flags, just add them after the command.
 
   ```
-  ./install --skip-nvidia --skip-apps
+  ./install --default
   ```
-
-- Input password when it ask for

@@ -81,6 +81,6 @@ fi
 # ###########################################################
 # General packages
 # ###########################################################
-log "=> Updating cache and upgrading packages..."
+log "Updating cache and upgrading packages..."
 sudo pacman -Syuu --noconfirm &> /dev/null
 log_sub "Cache updated and packages upgraded." success
