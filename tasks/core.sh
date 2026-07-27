@@ -55,7 +55,7 @@ install_official \
 # Hardware and system packages
 # ############################################################
 install_official \
-  "xdg-user-dirs fwupd mesa vulkan-tools vulkan-intel networkmanager bluez bluez-utils pipewire pipewire-pulse wireplumber wl-clipboard" \
+  "xdg-user-dirs fwupd mesa vulkan-tools vulkan-intel networkmanager bluez bluez-utils pipewire pipewire-pulse wireplumber wl-clipboard ufw" \
   "Installing hardware and system packages..."
 
 # ############################################################
@@ -82,3 +82,5 @@ enable_start_service "NetworkManager"
 enable_start_service "bluetooth"
 
 enable_start_service "systemd-resolved"
+
+enable_start_service "ufw"

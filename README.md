@@ -32,6 +32,7 @@ This is for my personal use and it's working in progress, so files can be delete
 - [x] Codecs (audio, image and video)
 - [x] Main file compressors (zip, unrar, p7zip...)
 - [x] Filesystem (dosfstools exfatprogs xfsprogs...)
+- [x] Firewall (ufw)
 - [x] Multimedia core (mesa, vulkan, network, bluetooth, pipewire...)
 - [x] Popular development packages (git, rust, python, nodejs...)
 - [x] Shell (zsh, fish, set as default, oh-my-posh)
