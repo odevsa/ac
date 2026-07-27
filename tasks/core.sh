@@ -65,6 +65,13 @@ install_official \
   "base-devel cmake git python rust nodejs-lts-iron npm" \
   "Installing development packages..."
 
+# ############################################################
+# Default home folders
+# ############################################################
+log "Ensuring default home folders..."
+mkdir -p "$HOME"/{Desktop,Documents,Downloads,Music,Pictures,Public,Templates,Videos} &> /dev/null || true
+log_sub "Ensured default home folders." success
+
 # ###########################################################
 # Enable services
 # ###########################################################
