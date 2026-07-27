@@ -6,7 +6,7 @@ source "helpers.sh"
 # Cosmic Desktop Environment
 # ###########################################################
 install_official \
-  "cosmic power-profiles-daemon xdg-user-dirs" \
+  "cosmic power-profiles-daemon" \
   "Installing Cosmic Desktop Environment..."
 
 # ###########################################################

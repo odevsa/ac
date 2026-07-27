@@ -55,7 +55,7 @@ install_official \
 # Hardware and system packages
 # ############################################################
 install_official \
-  "fwupd mesa vulkan-tools vulkan-intel networkmanager bluez bluez-utils pipewire pipewire-pulse wireplumber wl-clipboard" \
+  "xdg-user-dirs fwupd mesa vulkan-tools vulkan-intel networkmanager bluez bluez-utils pipewire pipewire-pulse wireplumber wl-clipboard" \
   "Installing hardware and system packages..."
 
 # ############################################################
@@ -66,11 +66,13 @@ install_official \
   "Installing development packages..."
 
 # ############################################################
-# Default home folders
+# User directories
 # ############################################################
-log "Ensuring default home folders..."
-mkdir -p "$HOME"/{Desktop,Documents,Downloads,Music,Pictures,Public,Templates,Videos} &> /dev/null || true
-log_sub "Ensured default home folders." success
+log "Creating user directories..."
+xdg-user-dirs-update &> /dev/null || true
+rm -rf "$HOME/Projects" &> /dev/null || true
+xdg-user-dirs-update &> /dev/null || true
+log_sub "Created user directories" success
 
 # ###########################################################
 # Enable services
