@@ -2,7 +2,7 @@
 set -euo pipefail
 source "helpers.sh"
 
-COLOR="\e[38;2;146;207;156m"
+COLOR="\e[38;2;23;147;209m"
 
 icon_logo() {
   local icon=(

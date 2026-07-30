@@ -10,8 +10,10 @@ install_official \
   "Installing flatpak..."
 
 # ###########################################################
-# Flathub remote
+# Flatpak remotes
 # ###########################################################
-log "Adding flathub remote..."
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo &> /dev/null || true
+log "Adding flatpak remotes..."
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo &> /dev/null || true
 log_sub "Flathub remote added." success
+flatpak remote-add --user --if-not-exists cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo &> /dev/null || true
+log_sub "Cosmic remote added." success
