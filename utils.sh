@@ -45,4 +45,12 @@ Terminal=false
 Categories=Development;
 EOF
 
+  # ###########################################################
+  # Add mesh as default 3D viewer
+  # ###########################################################
+  log "Adding mesh as default 3D viewer..."
+  for mime in model/stl model/obj image/x-tga model/gltf+json model/gltf-binary; do
+      xdg-mime default mesh.desktop $mime
+  done
+  
 print_end
