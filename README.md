@@ -21,6 +21,14 @@ This is for my personal use and it's working in progress, so files can be delete
       <img src="docs/images/screenshot-2.png" alt="Screenshot 2" />
     </td>
   </tr>
+  <tr>
+    <td>
+      <img src="docs/images/screenshot-3.png" alt="Screenshot 3" />
+    </td>
+    <td>
+      <img src="docs/images/screenshot-4.png" alt="Screenshot 4" />
+    </td>
+  </tr>
 </table>
 
 ## What does this do?
