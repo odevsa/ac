@@ -1,6 +1,7 @@
 <div align="center">
 
-[![Arch Linux](docs/images/arch-linux.webp)](https://archlinux.org)
+[![Arch Linux](docs/images/arch-linux.png)](https://archlinux.org)
+[![Cosmic DE](docs/images/cosmic-de.png)](https://system76.com/cosmic)
 
 # Arch + Cosmic
 
