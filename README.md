@@ -1,4 +1,10 @@
-# AC - Arch Cosmic
+<div align="center">
+
+[![Arch Linux](docs/images/arch-linux.webp)](https://archlinux.org)
+
+# Arch + Cosmic
+
+</div>
 
 A simple intallation of Cosmic Desktop Environment with my Dotfiles into Arch Linux and automated by shell script.
 
