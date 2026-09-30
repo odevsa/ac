@@ -28,13 +28,14 @@ CHOSEN_SHELL="zsh"
 DETECTED_INTEL=false
 DETECTED_AMD=false
 DETECTED_NVIDIA=false
-if lspci 2>/dev/null | grep -i -E "vga|3d|display" | grep -iq "intel"; then
+VGA_DEVICES=$(lspci 2>/dev/null | grep -i -E "vga compatible controller|3d controller|display controller" || true)
+if echo "$VGA_DEVICES" | grep -iq -E "\bintel\b"; then
   DETECTED_INTEL=true
 fi
-if lspci 2>/dev/null | grep -i -E "vga|3d|display" | grep -iq -E "amd|ati|radeon"; then
+if echo "$VGA_DEVICES" | grep -iq -E "\b(amd|ati|radeon)\b"; then
   DETECTED_AMD=true
 fi
-if lspci 2>/dev/null | grep -i -E "vga|3d|display" | grep -iq "nvidia"; then
+if echo "$VGA_DEVICES" | grep -iq -E "\bnvidia\b"; then
   DETECTED_NVIDIA=true
 fi
 
