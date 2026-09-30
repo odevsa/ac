@@ -15,19 +15,55 @@ print_logo default 1
 TMP_DIR="."
 RUN_ONLY_CORE=false
 RUN_DOTFILES=true
-RUN_GPU=all
-RUN_AMDGPU=true
-RUN_NVIDIA=true
+RUN_INTEL=false
+RUN_AMD=false
+RUN_NVIDIA=false
 RUN_APPS=true
 RUN_DOCKER=true
 RUN_PREFERENCES=true
 RUN_DEFAULT=false
 CHOSEN_SHELL="zsh"
 
+# Detect installed GPUs for smart hints
+DETECTED_INTEL=false
+DETECTED_AMD=false
+DETECTED_NVIDIA=false
+if lspci 2>/dev/null | grep -i -E "vga|3d|display" | grep -iq "intel"; then
+  DETECTED_INTEL=true
+fi
+if lspci 2>/dev/null | grep -i -E "vga|3d|display" | grep -iq -E "amd|ati|radeon"; then
+  DETECTED_AMD=true
+fi
+if lspci 2>/dev/null | grep -i -E "vga|3d|display" | grep -iq "nvidia"; then
+  DETECTED_NVIDIA=true
+fi
+
 for arg in "$@"; do
   case $arg in
     --default)
       RUN_DEFAULT=true
+      RUN_INTEL=$DETECTED_INTEL
+      RUN_AMD=$DETECTED_AMD
+      RUN_NVIDIA=$DETECTED_NVIDIA
+      ;;
+    --intel)
+      RUN_INTEL=true
+      ;;
+    --amd)
+      RUN_AMD=true
+      ;;
+    --nvidia)
+      RUN_NVIDIA=true
+      ;;
+    --all-gpus)
+      RUN_INTEL=true
+      RUN_AMD=true
+      RUN_NVIDIA=true
+      ;;
+    --no-gpu)
+      RUN_INTEL=false
+      RUN_AMD=false
+      RUN_NVIDIA=false
       ;;
     *)
       log "Unknown option: $arg" error
@@ -63,13 +99,38 @@ if [ "$RUN_DEFAULT" = false ] && [ "$#" -eq 0 ]; then
         RUN_DOTFILES=false
       fi
 
-      QUESTION="Run GPU drivers? (ALL/amdgpu/nvidia/none)"
-      ANSWER=$(ask "$QUESTION" warning)
-      asked_rewrite "$QUESTION" "$ANSWER"
-      ANSWER=$(echo "$ANSWER" | tr '[:upper:]' '[:lower:]')
-      if [[ $ANSWER == "all" ]] || [[ $ANSWER == "amdgpu" ]] || [[ $ANSWER == "nvidia" ]] || [[ $ANSWER == "none" ]]; then
-        RUN_GPU="$ANSWER"
+      # Detected GPUs hint
+      detected_gpus=""
+      if [ "$DETECTED_INTEL" = true ]; then detected_gpus="${detected_gpus}Intel "; fi
+      if [ "$DETECTED_AMD" = true ]; then detected_gpus="${detected_gpus}AMD "; fi
+      if [ "$DETECTED_NVIDIA" = true ]; then detected_gpus="${detected_gpus}NVIDIA "; fi
+      if [ -n "$detected_gpus" ]; then
+        log "Detected GPU hardware: ${detected_gpus}" info
       fi
+
+      # Intel GPU prompt
+      default_intel="n"; if [ "$DETECTED_INTEL" = true ]; then default_intel="y"; fi
+      prompt_intel="Install Intel GPU drivers (vulkan, vaapi)? (y/N)"
+      if [ "$default_intel" = "y" ]; then prompt_intel="Install Intel GPU drivers (vulkan, vaapi)? (Y/n)"; fi
+      ANSWER=$(ask "$prompt_intel" warning "$default_intel")
+      asked_rewrite "$prompt_intel" "$ANSWER"
+      if [[ $ANSWER == [yY] ]]; then RUN_INTEL=true; fi
+
+      # AMD GPU prompt
+      default_amd="n"; if [ "$DETECTED_AMD" = true ]; then default_amd="y"; fi
+      prompt_amd="Install AMD GPU drivers (vulkan, vaapi)? (y/N)"
+      if [ "$default_amd" = "y" ]; then prompt_amd="Install AMD GPU drivers (vulkan, vaapi)? (Y/n)"; fi
+      ANSWER=$(ask "$prompt_amd" warning "$default_amd")
+      asked_rewrite "$prompt_amd" "$ANSWER"
+      if [[ $ANSWER == [yY] ]]; then RUN_AMD=true; fi
+
+      # Nvidia GPU prompt
+      default_nvidia="n"; if [ "$DETECTED_NVIDIA" = true ]; then default_nvidia="y"; fi
+      prompt_nvidia="Install NVIDIA GPU drivers? (y/N)"
+      if [ "$default_nvidia" = "y" ]; then prompt_nvidia="Install NVIDIA GPU drivers? (Y/n)"; fi
+      ANSWER=$(ask "$prompt_nvidia" warning "$default_nvidia")
+      asked_rewrite "$prompt_nvidia" "$ANSWER"
+      if [[ $ANSWER == [yY] ]]; then RUN_NVIDIA=true; fi
 
       QUESTION="Run applications installation? (Y/n)"
       ANSWER=$(ask "$QUESTION" warning)
@@ -98,7 +159,7 @@ fi
 # ###########################################################
 # Summary
 # ###########################################################
-print_header "Let me do the hard work and go get some coffee" info
+print_header "Tasks that will be executed" info
 print_start
   flags=""
   if [ "$RUN_DEFAULT" = true ]; then flags="$flags--default "; fi
@@ -118,13 +179,19 @@ print_start
   else
     log "Task: Dotfiles" muted
   fi
-  if { [ "$RUN_GPU" = "all" ] || [ "$RUN_GPU" = "amdgpu" ]; } && [ "$RUN_ONLY_CORE" = false ]; then
+  if [ "$RUN_INTEL" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
+    log "Task: GPU Drivers (Intel)" success
+  else
+    log "Task: GPU Drivers (Intel)" muted
+  fi
+
+  if [ "$RUN_AMD" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
     log "Task: GPU Drivers (AMD)" success
   else
     log "Task: GPU Drivers (AMD)" muted
   fi
 
-  if { [ "$RUN_GPU" = "all" ] || [ "$RUN_GPU" = "nvidia" ]; } && [ "$RUN_ONLY_CORE" = false ]; then
+  if [ "$RUN_NVIDIA" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
     log "Task: GPU Drivers (NVIDIA)" success
   else
     log "Task: GPU Drivers (NVIDIA)" muted
@@ -149,6 +216,16 @@ print_start
   fi
 
   log "Task: Desktop Environment (Cosmic)" success
+
+  print_start
+  QUESTION="Do you want to continue? (Y/n)"
+  ANSWER=$(ask "$QUESTION" warning "y")
+  asked_rewrite "$QUESTION" "$ANSWER"
+  if [[ $ANSWER == [nN] ]]; then
+    log_sub "Installation cancelled." error
+    print_end
+    exit 0
+  fi
 print_end
 
 # ###########################################################
@@ -176,11 +253,15 @@ if [ "$RUN_DOTFILES" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
   run_task "Dotfiles" "$TMP_DIR/tasks/dotfiles.sh"
 fi
 
-if { [ "$RUN_GPU" = "all" ] || [ "$RUN_GPU" = "amdgpu" ]; } && [ "$RUN_ONLY_CORE" = false ]; then
+if [ "$RUN_INTEL" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
+  run_task "GPU Drivers (Intel)" "$TMP_DIR/tasks/intel.sh"
+fi
+
+if [ "$RUN_AMD" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
   run_task "GPU Drivers (AMD)" "$TMP_DIR/tasks/amdgpu.sh"
 fi
 
-if { [ "$RUN_GPU" = "all" ] || [ "$RUN_GPU" = "nvidia" ]; } && [ "$RUN_ONLY_CORE" = false ]; then
+if [ "$RUN_NVIDIA" = true ] && [ "$RUN_ONLY_CORE" = false ]; then
   run_task "GPU Drivers (NVIDIA)" "$TMP_DIR/tasks/nvidia.sh"
 fi
 

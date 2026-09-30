@@ -9,54 +9,20 @@ install_official \
   "reflector" \
   "Installing reflector..."
 
-# ###########################################################
-# Reflector Service
-# ###########################################################
-log "Enabling and starting reflector services..."
-
-if [ ! -f /etc/systemd/system/reflector.service ]; then
-  sudo tee /etc/systemd/system/reflector.service > /dev/null <<EOL
-[Unit]
-Description=Pacman mirrorlist update
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
-
-[Install]
-RequiredBy=multi-user.target
+log "Configuring reflector..."
+sudo mkdir -p /etc/xdg/reflector
+sudo tee /etc/xdg/reflector/reflector.conf > /dev/null <<EOL
+--save /etc/pacman.d/mirrorlist
+--protocol https
+--latest 10
+--sort rate
 EOL
-  log_sub "Created /etc/systemd/system/reflector.service." success
-else
-  log_sub "reflector.service already exists." warning
-fi
+log_sub "Configured /etc/xdg/reflector/reflector.conf" success
 
-if [ ! -f /etc/systemd/system/reflector.timer ]; then
-  sudo tee /etc/systemd/system/reflector.timer > /dev/null <<EOL
-[Unit]
-Description=Reflector weekly timer
+log "Updating initial pacman mirrorlist..."
+sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist || true
+log_sub "Mirrors updated." success
 
-[Timer]
-OnCalendar=Mon *-*-* 7:00:00
-RandomizeDelaySec=15h
-Persistent=true
-
-[Install]
-WantedBy=timers.target
-EOL
-  sudo systemctl daemon-reload || true
-  log_sub "Created /etc/systemd/system/reflector.timer." success
-else
-  log_sub "reflector.timer already exists." warning
-fi
-
-# ###########################################################
-# Enable and start reflector services
-# ###########################################################
-sudo systemctl daemon-reload || true
-enable_start_service "reflector.service"
 enable_start_service "reflector.timer"
 
 # ###########################################################

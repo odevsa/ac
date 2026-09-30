@@ -28,15 +28,16 @@ else
 fi
 
 # ###########################################################
-# Fixing SSH_AUTH_SOCK missing issue
+# SSH_AUTH_SOCK configuration
 # ###########################################################
-log "Fixing SSH_AUTH_SOCK missing issue..."
-if ! grep -q 'SSH_AUTH_SOCK=' /etc/environment; then
-  echo 'SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"' | sudo tee -a /etc/environment > /dev/null
-  log_sub "Added SSH_AUTH_SOCK to /etc/environment" success
-else
-  log_sub "SSH_AUTH_SOCK already set in /etc/environment, skipping" warning
+log "Configuring SSH_AUTH_SOCK environment..."
+sudo mkdir -p /etc/profile.d
+sudo tee /etc/profile.d/ssh-agent.sh > /dev/null <<'EOF'
+if [ -z "${SSH_AUTH_SOCK}" ]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/ssh-agent.socket"
 fi
+EOF
+log_sub "Created /etc/profile.d/ssh-agent.sh" success
 
 # ############################################################
 # Disable watchdog
