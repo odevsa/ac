@@ -62,7 +62,7 @@ install_official \
 # Development packages
 # ############################################################
 install_official \
-  "base-devel cmake git python rustup fnm" \
+  "base-devel cmake git python rustup just fnm" \
   "Installing development packages..."
 
 # ############################################################
