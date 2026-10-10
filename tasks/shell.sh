@@ -14,7 +14,7 @@ install_official \
 # Shell and utilities
 # ############################################################
 install_official \
-  "zsh fish lsd bat" \
+  "zsh fish lsd bat jq fd" \
   "Installing shell and utilities..."
 
 # ############################################################
