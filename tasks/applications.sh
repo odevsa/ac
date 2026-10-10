@@ -17,13 +17,6 @@ install_official \
 	"Installing graphical applications..."
 
 # ###########################################################
-# Graphics applications
-# ###########################################################
-install_official \
-	"gimp inkscape" \
-	"Installing graphics applications..."
-
-# ###########################################################
 # 3D applications
 # ###########################################################
 install_official \

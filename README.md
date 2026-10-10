@@ -57,7 +57,6 @@ This is for my personal use and it's working in progress, so files can be delete
 - [x] 🏳️ - Nvidia GPU Drivers
 - [x] 🏳️ Terminal Applications (fastfetch, btop...)
 - [x] 🏳️ - Utilities Applications (nautilus, file-roller, snapshot, totem...)
-- [x] 🏳️ - Graphical Applications (gimp, inkscape)
 - [x] 🏳️ - 3D Applications (blender, freecad)
 - [x] 🏳️ - Docker (docker, docker-compose)
 - [x] 🏳️ - Browser (firefox)
