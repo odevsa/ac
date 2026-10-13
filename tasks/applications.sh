@@ -13,7 +13,7 @@ install_official \
 # Graphical applications
 # ###########################################################
 install_official \
-	"gnome-calculator gnome-connections gnome-disk-utility baobab cosmic-monitor snapshot simple-scan evince file-roller totem loupe" \
+	"gnome-calculator gnome-connections gnome-disk-utility baobab snapshot simple-scan evince file-roller totem" \
 	"Installing graphical applications..."
 
 # ###########################################################
